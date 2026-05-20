@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>V — ALTER EGO</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+@font-face {
+  font-family: 'NEOPIXEL';
+  src: url('data:font/otf;base64,T1RUTwANAIAAAwBQQ0ZGIL+87L4AAAy8AAAz/kRTSUcAAAABAABCnAAAAAhHREVGAA8AxwAAQLwAAAAUR1BPU8OC01MAAEDQAAABwEdTVUIAAQAAAABCkAAAAApPUy8yaClpUwAABIAAAABgY21hcCnQNA4AAAbsAAAFsGhlYWQkXlPlAAAA5AAAADZoaGVhCZ0GBgAABFwAAAAkaG10eOdTLiAAAAEcAAADQG1heHAA0FAAAAAA3AAAAAZuYW1llYEwQwAABOAAAAIKcG9zdP+4ADIAAAycAAAAIAAAUAAA0AAAAAEAAAABAABLWHVrXw889QADA+gAAAAA38qINQAAAADfyog1/87/OAXkA2MAAAADAAIAAAAAAAAB9ABdAQQAAAKPADwCjwA8Am4APAKQADwCWgA8AlkAPAKuADwCjwA8AOMAPAJCADwCggA8AkcAPAPcAEEC+QA8Ao8APAKPADwC/QA8Ao8APAKPADwCUwAeAoUAPAKPADwDZQA8Ao8APAKPADwCjwA8AlYAPAJSADwCCAA8AlIAPAJLADwB3wA8AlUAPAJAADwA3wA8APX/zgI4ADwA3wA8AzMAPAI/ADwCXgA8AlUAPAJVADwB0wA8AkEAPAIAADwCPwA8Aj8APAMzADwCNwA8AkoAPAJWADwCjwA8Ao4APAKPADwBhgA8AwIAPAJaADwCWAA8A2UAPAKPADwC+QA8AvkAPAKCADwCjwA8A9wAQQKPADwCjwA8Ao8APAKPADwCbgA8AlMAHgKPADwDZQA8Ao8APAKPADwCtAA8A2UAPAOhADwCjwA8AtwACgNSADwCggA8A1cAPAKPADwCVgA8AkoAPAJYADwBugA8AqIAPAJLADwCSwA8AwEAPAIsADwCSgA8AkoAPAI4ADwCSgA8A2IAPAJKADwCXgA8AkoAPAJVADwCCAA8Ah8AHgJKADwDUgA8AjcAPAI3ADwChwA8AwMAPAMXADwCSwA8AmcAdgLnADwCLwA8Aw0APAJKADwCjwA8AbgAPAKPADwCjwA8AmUAPAKPADwCjwA8AkwAPAKPADwCjwA8AQsAUAEVAFACWAD1AOkAPAELAFABCwBQAQsAUAI+ADwCPgA8AOMAPAFGADwCLgA8AscAPAFqAAoBagAUAPkAOwD5ADwBVAA8AVQACgEaADwBJAAKAhYAPAJSADwC+QA8AlYAPAEVAFABFQBQAcUAUAHFAFABFQBQARUAUAHwADwB8AA8AUIAPAFCADwBhgA8AlgA5AJYADwCFgA8Ag0APALAADwCTQA8ApUAPAJNADwCwAA8Ak0AOwKVADsCWAA7A1cAOwK/ADwCWAAAAgIAPAMsADwCWAAAAlgAAAJYAAACWAAAAlgAAAJYAAAGLwAeAlgAAAJYAAACWAAAAlgAAAJYAAADaQA8AAAAAAMLAB4DRwA8A0kAPANHADwDRwA8Az0AOwMiADwDLAA8AuQAPAIXADwCqQA8AAEAAAPo/zgAAAYv/87/zgXkAAEAAAAAAAAAAAAAAAAAAADQAAMCWgGQAAUACAKKAlgAAABLAooCWAAAAV4AMgE0AAAAAAUAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAFVLV04AQAAg//8DIP84AMgD6ADIAAAABAAAAAACAgK8AAAAIAACAAAADACWAAEAAAAAAAEACAAAAAEAAAAAAAIABwAIAAEAAAAAAAMAGwAPAAEAAAAAAAQAEAAqAAEAAAAAAAUAMgA6AAEAAAAAAAYAEABsAAMAAQQJAAEAEAB8AAMAAQQJAAIADgCMAAMAAQQJAAMANgCaAAMAAQQJAAQAIADQAAMAAQQJAAUAZADwAAMAAQQJAAYAIAFUTkVPUElYRUxSZWd1bGFyMS4wMDA7VUtXTjtORU9QSVhFTC1SZWd1bGFyTkVPUElYRUwgUmVndWxhclZlcnNpb24gMS4wMDA7aG90Y29udiAxLjAuMTA5O21ha2VvdGZleGUgMi41LjY1NTk2TkVPUElYRUwtUmVndWxhcgBOAEUATwBQAEkAWABFAEwAUgBlAGcAdQBsAGEAcgAxAC4AMAAwADAAOwBVAEsAVwBOADsATgBFAE8AUABJAFgARQBMAC0AUgBlAGcAdQBsAGEAcgBOAEUATwBQAEkAWABFAEwAIABSAGUAZwB1AGwAYQByAFYAZQByAHMAaQBvAG4AIAAxAC4AMAAwADAAOwBoAG8AdABjAG8AbgB2ACAAMQAuADAALgAxADAAOQA7AG0AYQBrAGUAbwB0AGYAZQB4AGUAIAAyAC4ANQAuADYANQA1ADkANgBOAEUATwBQAEkAWABFAEwALQBSAGUAZwB1AGwAYQByAAAAAAAEAAAAAwAAACQAAAAEAAAB7AADAAEAAAAkAAMACgAAAewABAHIAAAATgBAAAUADgAjAC8AOQA7AEAAWgBfAHoAfQChAKcAqQCrAK4AsAC3ALsAvwQBBBUEJQQsBDUERQRPBFEgFCAaIB4gIiAmIDohIiGZIhIlyiYEJjz//wAAACAAJgAwADoAPwBBAFsAYQB7AKEApgCpAKsArgCwALYAuwC/BAEEEAQWBCYELQQ2BEYEUSATIBggHCAgICYgOSEiIZAiEiXKJgQmPP//AAAAAABIAEoAAP/BAAD/uwAA/+cAAAAS//YADgAOAAD/5//L/Dv8JvwnAAD8J/woAAD8DOCFAAAAAAAA4GDgat+bAADeltrq2rHaegABAE4AVAAAAAAAYgAAAGIAAABoAAAAagAAAAAAAAAAAGQAAAAAAAAAAAAAAFwAAAAAAGQAAAAAAHIAdgB6AAAAAAAAAHgAAAAAAAAAAAAAAAEAhwClAI4AuACmAJEAkgCNAKcAgwCXAIIAjwCJALcAlQCQAJYAqQCaAJMAvwCUAMAAugC5AIsATgBNAE8AUABSAFMAUQBvAG4AcABxAHMAdAByAHUAdgB3AJ8AoACbAJ0AngCcAMEAwgCMALAAqgCsAK4AsgCzALEAqwCtAK8ADAAAAAADxAAAAAAAAABPAAAAIAAAACAAAAABAAAAIQAAACEAAACHAAAAIgAAACIAAAClAAAAIwAAACMAAACOAAAAJgAAACYAAAC4AAAAJwAAACcAAACmAAAAKAAAACkAAACRAAAAKgAAACoAAACNAAAAKwAAACsAAACnAAAALAAAACwAAACDAAAALQAAAC0AAACXAAAALgAAAC4AAACCAAAALwAAAC8AAACPAAAAMAAAADkAAAB4AAAAOgAAADsAAACEAAAAPwAAAD8AAACJAAAAQAAAAEAAAAC3AAAAQQAAAFoAAAACAAAAWwAAAFsAAACVAAAAXAAAAFwAAACQAAAAXQAAAF0AAACWAAAAXgAAAF4AAACpAAAAXwAAAF8AAACaAAAAYQAAAHoAAAAcAAAAewAAAHsAAACTAAAAfAAAAHwAAAC/AAAAfQAAAH0AAACUAAAAoQAAAKEAAACIAAAApgAAAKYAAADAAAAApwAAAKcAAAC6AAAAqQAAAKkAAAC7AAAAqwAAAKsAAAChAAAArgAAAK4AAAC8AAAAsAAAALAAAAC+AAAAtgAAALYAAAC5AAAAtwAAALcAAACLAAAAuwAAALsAAACiAAAAvwAAAL8AAACKAAAEAQAABAEAAAA8AAAEEAAABBUAAAA2AAAEFgAABCUAAAA9AAAEJgAABCYAAABOAAAEJwAABCcAAABNAAAEKAAABCkAAABPAAAEKgAABCsAAABSAAAELAAABCwAAABRAAAELQAABDUAAABUAAAENgAABEUAAABeAAAERgAABEYAAABvAAAERwAABEcAAABuAAAESAAABEkAAABwAAAESgAABEsAAABzAAAETAAABEwAAAByAAAETQAABE8AAAB1AAAEUQAABFEAAABdAAAgEwAAIBQAAACYAAAgGAAAIBkAAACfAAAgGgAAIBoAAACbAAAgHAAAIB0AAACdAAAgHgAAIB4AAACcAAAgIAAAICEAAADBAAAgIgAAICIAAACMAAAgJgAAICYAAACGAAAgOQAAIDoAAACjAAAhIgAAISIAAAC9AAAhkAAAIZAAAACwAAAhkQAAIZEAAACqAAAhkgAAIZIAAACsAAAhkwAAIZMAAACuAAAhlAAAIZUAAACyAAAhlgAAIZYAAACxAAAhlwAAIZcAAACrAAAhmAAAIZgAAACtAAAhmQAAIZkAAACvAAAiEgAAIhIAAACoAAAlygAAJcoAAAC0AAAmBAAAJgQAAAC1AAAmPAAAJjwAAAC2AAH28AAB9vAAAADDAAMAAAAAAAD/tQAyAAAAAAAAAAAAAAAAAAAAAAAAAAABAAQCAAEBARFORU9QSVhFTC1SZWd1bGFyAAEBASb4DwD4dwH4eAL4GAQc/84c/zgcBeQcA2MF+lUPHAUPEZwcKQQSAF4CAAEACAAPABYAHQAkACsAMgA5AEAARwBOAFUAXABjAGoAcQB4AH8AhgCNAJQAmwCiAKkAsAC3AL4AxQDMANMA2gDhAOgA7wD2AP0BBAELARIBGQEgAScBLgE1ATwBQwFKAVEBWAFfAWYBbQF0AXsBggGJAZABlwGeAaUBrAGzAboBwQHIAc8B1gHdAeQB7gH5AgACCQISAhkCIAIpAjICOQI8AkICSQJSAmECZwJyAnkCgAKEApAClQKbAqwCvHVuaTA0MTB1bmkwNDExdW5pMDQxM3VuaTA0MTR1bmkwNDE1dW5pMDQwMXVuaTA0MTZ1bmkwNDE3dW5pMDQxOHVuaTA0MUF1bmkwNDE5dW5pMDQxRHVuaTA0MUN1bmkwNDFFdW5pMDQxRnVuaTA0MjN1bmkwNDIwdW5pMDQyNXVuaTA0Mjd1bmkwNDFCdW5pMDQxMnVuaTA0MkJ1bmkwNDJEdW5pMDQyRnVuaTA0MzB1bmkwNDMydW5pMDQzM3VuaTA0MzR1bmkwNDM1dW5pMDQ1MXVuaTA0Mzd1bmkwNDM4dW5pMDQzOXVuaTA0M0F1bmkwNDNCdW5pMDQzQ3VuaTA0M0R1bmkwNDM2dW5pMDQzRnVuaTA0NDB1bmkwNDQxdW5pMDQ0MnVuaTA0MkV1bmkwNDI0dW5pMDQyQ3VuaTA0MjJ1bmkwNDI5dW5pMDQzMXVuaTA0NDR1bmkwNDJBdW5pMDQ0N3VuaTA0NDZ1bmkwNDI2dW5pMDQyOHVuaTA0NEN1bmkwNDQ4dW5pMDQ0QXVuaTA0NDl1bmkwNDQ1dW5pMDQ0QnVuaTA0NEZ1bmkwNDIxdW5pMDQzRXVuaTA0NDN1bmkwNDRFdW5pMDQ0RGFycm93dXBsb3plbmdldW5pMjE5N2Fycm93cmlnaHRicmV2ZWNvbWJjeXVuaTI2MDRhcnJvd3VwZG5hcnJvd2JvdGh1bmkyMTk2dW5pMjE5OWFycm93bGVmdGFycm93ZG93bnVuaTIxOThzdW51MUY2RjBwbGFuZXQxYmxhY2tob2xlbW90b3JpdW1DcnlzdGFsc3ltYm9sZm91cnBsYW5ldHNwbGFuZXQyUGxhbmV0M3N0YXJuZXdHbHlwaC4wMDN3YXZlc2dhbGF4eWNvcHlyaWdodCBtaXNzaW5nTkVPUElYRUwgUmVndWxhcgAAAQABAAAiGQBCGQGHAQGbAAGJBgGRAAGQAAGaAAGTAAGSAAGUAQGXAAHEAAG0AAGWAAGyAAGYAQG7AQG1AAGzAAG4AAGcAQGxAAGeAQG2AAGgBAGsAAGlBgHFAAGtAwHGAAG3AAHBAAG5AQG+AAHAAAG9AAG/AAHCAAHIAAHHAAHDAAARCQAPAAANAAAbAQB5AAACAABgAAAgAAB7AAByAAB0AAALAAAEAAAQAAA9AAAJAQBcAABeAAA8AAA+AAAOAABvAACJAABAAAB1AQBpAAB3AABBAAAIAABqAAB4AABrAQADAABoAAAMAACmAAA/AAHJAAHLAQHVAAHUAAHSAQHRAAHQAAHPAAHKAAHOAAHWAAAhAAAH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') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;cursor:none!important;}
+button,input,textarea,select,a,[type="submit"]{
+  pointer-events:auto;
+  touch-action:manipulation;
+}
+@media (hover:none) and (pointer:coarse){
+  *{cursor:auto!important;}
+  button,input,textarea,select,a,[type="submit"]{cursor:pointer!important;}
+  #cursor{display:none!important;pointer-events:none!important;}
+  .gpt{display:none!important;}
+}
+html{scroll-behavior:smooth;}
+html::-webkit-scrollbar{display:none;}
+html{scrollbar-width:none;-ms-overflow-style:none;}
+body{
+  background:#cc0000;
+  color:#080004;
+  font-family:'IBM Plex Mono',monospace;
+  overflow-x:hidden;
+}
+
+/* ── NOISE ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-size:200px 200px;opacity:.5;mix-blend-mode:multiply;
+}
+
+/* ── SCANLINES ── */
+#scanlines{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.04) 3px,rgba(0,0,0,.04) 4px);
+}
+
+/* ── GRAIN ── */
+#grain{position:fixed;inset:0;z-index:3;pointer-events:none;width:100%;height:100%;opacity:.035;mix-blend-mode:multiply;}
+
+/* ── CURSOR ── */
+#cursor{position:fixed;z-index:99999;pointer-events:none;transform:translate(-2px,-50%);}
+#cursor.glow svg polygon{fill:#080004;}
+@keyframes spearGlow{
+  0%{filter:drop-shadow(0 0 8px #080004);}
+  100%{filter:drop-shadow(0 0 18px #080004) drop-shadow(0 0 36px rgba(0,0,0,.6));}
+}
+
+/* ── GLITTER ── */
+.gpt{position:fixed;z-index:99998;pointer-events:none;border-radius:50%;animation:gfly .6s ease forwards;}
+@keyframes gfly{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0);}}
+
+/* ── GOV CANVAS ── */
+#govCanvas{position:fixed;inset:0;z-index:9000;pointer-events:none;}
+
+/* ── TRANSITION OVERLAY ── */
+#transOverlay{position:fixed;inset:0;z-index:9999;pointer-events:none;display:none;background:#000;overflow:hidden;}
+
+/* ── VERSION ── */
+.version-footer{font-family:"NEOPIXEL",monospace;
+  position:fixed;bottom:14px;right:18px;z-index:20;
+  font-size:9px;letter-spacing:.2em;color:rgba(0,0,0,.45);text-transform:uppercase;
+}
+
+/* ══════════════════════════════════════
+   LAYOUT — UTOPIATOKYO GRID SYSTEM
+══════════════════════════════════════ */
+
+/* Outer border frame */
+.frame{
+  position:relative;z-index:10;
+  border:1.5px solid rgba(0,0,0,.25);
+  margin:10px;
+  min-height:calc(100vh - 20px);
+  display:flex;flex-direction:column;
+}
+
+/* Top strip — logo + coords + country */
+.top-strip{
+  display:grid;
+  grid-template-columns:clamp(140px,20vw,220px) 1fr clamp(80px,12vw,120px);
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+  height:44px;
+}
+.top-strip > *{
+  display:flex;align-items:center;
+  padding:0 16px;
+}
+.top-strip > *:not(:last-child){
+  border-right:1.5px solid rgba(0,0,0,.25);
+}
+.logo-text{
+  font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.12em;
+  text-transform:uppercase;color:#080004;
+}
+.logo-text span{-webkit-text-stroke:1.2px #080004;color:transparent;}
+.top-coords{font-family:"NEOPIXEL",monospace;font-size:9px;letter-spacing:.18em;color:rgba(0,0,0,.55);text-transform:uppercase;}
+.top-country{font-size:9px;letter-spacing:.18em;color:rgba(0,0,0,.55);text-transform:uppercase;justify-content:flex-end;}
+
+/* Hero title row */
+.title-row{
+  padding:10px 14px 4px;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.main-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(5rem,15vw,14rem);
+  line-height:.88;
+  letter-spacing:-.02em;
+  white-space:nowrap;
+  display:flex;align-items:baseline;gap:.04em;
+}
+.mt-fill{color:#080004;}
+.mt-outline{-webkit-text-stroke:2.5px #080004;color:transparent;}
+
+/* Content grid — 3 columns like utopiatokyo */
+.content-grid{
+  display:grid;
+  grid-template-columns:2fr 1.2fr 2fr;
+  flex:1;
+}
+.cg-col{
+  position:relative;
+  display:flex;flex-direction:column;
+}
+.cg-col:not(:last-child){border-right:1.5px solid rgba(0,0,0,.25);}
+
+/* Cell within column */
+.cell{
+  padding:18px 20px;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+  position:relative;
+}
+.cell.flex{display:flex;flex-direction:column;}
+.cell.fill{flex:1;}
+.cell.row{flex-direction:row;align-items:center;}
+
+/* Taglines — left col */
+.tagline-block{
+  padding:14px 20px;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+}
+.tagline-text{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(2.2rem,5vw,4.5rem);
+  line-height:1.05;
+  color:#080004;
+  letter-spacing:-.01em;
+  display:block;
+}
+
+/* Execute button */
+.exec-btn{
+  display:inline-flex;align-items:center;
+  border:1.5px solid #080004;
+  padding:8px 18px;
+  font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+  color:#080004;cursor:none;
+  transition:all .2s;
+  position:relative;
+  background:transparent;
+}
+/* bracket corners */
+.exec-btn::before,.exec-btn::after{
+  content:'';position:absolute;
+  width:8px;height:8px;
+  border-color:rgba(0,0,0,.7);border-style:solid;
+}
+.exec-btn::before{top:-3px;left:-3px;border-width:2px 0 0 2px;}
+.exec-btn::after{bottom:-3px;right:-3px;border-width:0 2px 2px 0;}
+.exec-btn:hover{background:rgba(0,0,0,.04);}
+.exec-btn.cyan-leak:hover{color:rgba(0,100,200,.8);border-color:rgba(0,150,255,.5);}
+
+/* Mid col — cinematic panel */
+.cin-panel-wrap{
+  flex:1;display:flex;align-items:stretch;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+}
+#cinPanel{
+  width:100%;background:rgba(0,0,0,.08);
+  position:relative;overflow:hidden;
+  min-height:200px;
+}
+.cp-state{position:absolute;inset:0;opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .08s;}
+.cp-state.active{opacity:1;}
+#panelGlitch{position:absolute;inset:0;z-index:5;display:none;pointer-events:none;}
+
+/* Clapboard */
+.cpb-flap{width:80%;border:1.5px solid rgba(0,0,0,.5);position:relative;overflow:hidden;margin-bottom:-1px;padding:8px 14px;}
+.cpb-flap::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(0,0,0,.15) 0,rgba(0,0,0,.15) 8px,transparent 8px,transparent 10px);}
+.cpb-flap-txt{position:relative;z-index:2;display:flex;justify-content:space-between;font-family:'Anton',sans-serif;font-size:clamp(.65rem,1.3vw,.9rem);color:rgba(0,0,0,.75);letter-spacing:.1em;}
+.cpb-body{width:80%;border:1.5px solid rgba(0,0,0,.5);padding:12px 16px;background:rgba(0,0,0,.06);}
+.cpb-title{font-family:'Anton',sans-serif;font-size:clamp(1rem,2.5vw,1.8rem);color:#080004;letter-spacing:.06em;margin-bottom:8px;}
+.cpb-row{display:flex;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.12);padding:4px 0;font-size:8px;letter-spacing:.12em;color:rgba(0,0,0,.65);}
+
+/* Timeline */
+.cpt-wrap{width:90%;padding:14px;}
+.cpt-label{font-family:'Anton',sans-serif;font-size:clamp(.85rem,1.8vw,1.3rem);color:rgba(0,0,0,.65);letter-spacing:.15em;text-align:center;margin-bottom:14px;}
+.cpt-track{height:5px;background:rgba(0,0,0,.15);margin-bottom:8px;overflow:hidden;}
+.cpt-fill{height:100%;background:rgba(0,0,0,.5);animation:trackPlay 4s ease-in-out infinite;}
+@keyframes trackPlay{0%{width:0}50%{width:75%}100%{width:0}}
+.cpt-clip{height:24px;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.25);margin:3px 0;display:flex;align-items:center;padding:0 10px;font-size:8px;letter-spacing:.12em;color:rgba(0,0,0,.65);position:relative;}
+.cpt-clip::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:rgba(0,0,0,.5);}
+
+/* Screenplay */
+.cps-doc{width:75%;background:rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.2);padding:16px;font-size:9px;line-height:2;color:rgba(0,0,0,.65);letter-spacing:.05em;}
+.cps-slug{color:rgba(0,0,0,.85);font-weight:500;letter-spacing:.14em;}
+.cps-char{text-align:center;color:rgba(0,0,0,.75);}
+.cps-dial{text-align:center;padding:0 12%;color:rgba(0,0,0,.6);}
+
+/* Storyboard */
+.cpsb-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;width:84%;}
+.cpsb-frame{aspect-ratio:4/3;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:7px;letter-spacing:.1em;color:rgba(0,0,0,.45);position:relative;}
+.cpsb-frame::after{content:attr(data-n);position:absolute;bottom:3px;left:4px;font-size:6px;color:rgba(0,0,0,.35);}
+
+/* Lens */
+.cpl-lens{width:min(130px,35%);aspect-ratio:1;border-radius:50%;border:2px solid rgba(0,0,0,.45);box-shadow:0 0 0 8px rgba(0,0,0,.06),0 0 0 16px rgba(0,0,0,.03),inset 0 0 30px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;}
+.cpl-inner{width:60%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;}
+.cpl-core{width:30%;aspect-ratio:1;border-radius:50%;background:rgba(0,0,0,.35);box-shadow:0 0 12px rgba(0,0,0,.25);}
+
+/* Right col — works */
+.work-item{
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+  padding:14px 20px;cursor:none;transition:all .22s;
+  position:relative;overflow:hidden;
+}
+.work-item::before{content:'';position:absolute;left:-100%;top:0;bottom:0;width:100%;background:linear-gradient(90deg,transparent,rgba(0,0,0,.06),transparent);transition:left .4s ease;}
+.work-item:hover::before{left:100%;}
+.work-item:hover .work-title{letter-spacing:.14em;}
+.work-title{font-family:'Anton',sans-serif;font-size:clamp(1.2rem,2.5vw,2.2rem);color:#080004;letter-spacing:.04em;display:block;transition:all .22s;}
+.work-meta{font-size:9px;letter-spacing:.18em;color:rgba(0,0,0,.5);text-transform:uppercase;margin-top:3px;display:block;}
+
+/* T-toggle */
+.t-toggle{display:inline-block;transition:all .22s;cursor:none;}
+.t-toggle.outlined{-webkit-text-stroke:1.5px #080004;color:transparent!important;}
+
+/* Small text */
+.small-meta{font-family:'NEOPIXEL',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.5);}
+.small-text{font-size:11px;line-height:1.9;color:rgba(0,0,0,.65);letter-spacing:.03em;}
+
+/* ══════════════════════════════════════
+   ABOUT SECTION
+══════════════════════════════════════ */
+.section-frame{
+  position:relative;z-index:10;
+  border:1.5px solid rgba(0,0,0,.25);
+  border-top:none;
+  margin:0 10px;
+}
+.section-topstrip{
+  display:grid;grid-template-columns:auto 1fr auto;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+  height:44px;
+}
+.section-topstrip > *{display:flex;align-items:center;padding:0 16px;}
+.section-topstrip > *:not(:last-child){border-right:1.5px solid rgba(0,0,0,.25);}
+
+.about-title-row{
+  padding:8px 14px 4px;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.about-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(3.5rem,9vw,8rem);
+  line-height:.9;letter-spacing:-.02em;
+  display:flex;align-items:baseline;gap:.06em;
+}
+.at-fill{color:#080004;}
+.at-out{-webkit-text-stroke:2px #080004;color:transparent;}
+
+.dossier-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+}
+.dossier-block{
+  padding:28px 24px;
+  border-right:1.5px solid rgba(0,0,0,.25);
+  position:relative;cursor:none;transition:background .22s;
+}
+.dossier-block:last-child{border-right:none;}
+.dossier-block:nth-child(3){border-top:1.5px solid rgba(0,0,0,.25);}
+.dossier-block:nth-child(4){border-top:1.5px solid rgba(0,0,0,.25);border-right:none;}
+.dossier-block:hover{background:rgba(0,0,0,.05);}
+.db-id{font-family:"NEOPIXEL",monospace;font-size:8px;letter-spacing:.28em;color:rgba(0,0,0,.4);text-transform:uppercase;margin-bottom:10px;}
+.db-title{font-family:'Anton',sans-serif;font-size:clamp(1rem,2vw,1.5rem);color:#080004;letter-spacing:.06em;margin-bottom:12px;}
+.db-content{font-size:11px;line-height:2;color:rgba(0,0,0,.65);letter-spacing:.03em;}
+.db-content em{color:#080004;font-style:normal;font-weight:500;}
+.db-quote{font-family:'Anton',sans-serif;font-size:clamp(.85rem,1.5vw,1.2rem);color:rgba(0,0,0,.5);border-left:2.5px solid rgba(0,0,0,.3);padding-left:14px;margin-top:14px;line-height:1.45;}
+.db-restricted{position:absolute;top:12px;right:14px;font-size:7px;letter-spacing:.22em;color:rgba(0,0,0,.3);text-transform:uppercase;}
+.db-traits{display:flex;flex-direction:column;gap:5px;margin-top:5px;}
+.db-trait{display:flex;gap:12px;align-items:baseline;border-bottom:1px solid rgba(0,0,0,.1);padding:5px 0;font-size:10px;}
+.dt-l{color:rgba(0,0,0,.4);letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;font-size:8px;}
+.dt-v{color:rgba(0,0,0,.65);}
+
+.about-projects{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.ap-item{
+  padding:20px 18px;border-right:1.5px solid rgba(0,0,0,.25);
+  cursor:none;transition:background .22s;
+}
+.ap-item:last-child{border-right:none;}
+.ap-item:hover{background:rgba(0,0,0,.05);}
+.ap-title{font-family:'Anton',sans-serif;font-size:clamp(.95rem,1.8vw,1.4rem);color:#080004;letter-spacing:.06em;margin-bottom:5px;display:block;}
+.ap-genre{font-size:8px;letter-spacing:.15em;color:rgba(0,0,0,.5);text-transform:uppercase;}
+.ap-status{font-size:8px;letter-spacing:.1em;color:rgba(0,0,0,.35);margin-top:3px;display:block;}
+
+/* ══════════════════════════════════════
+   WRITINGS — SCREENPLAY PAPERS
+══════════════════════════════════════ */
+.writings-topstrip{
+  display:grid;grid-template-columns:auto 1fr auto;
+  border-bottom:1.5px solid rgba(0,0,0,.25);height:44px;
+}
+.writings-topstrip > *{display:flex;align-items:center;padding:0 16px;}
+.writings-topstrip > *:not(:last-child){border-right:1.5px solid rgba(0,0,0,.25);}
+.writings-title-row{padding:8px 14px 4px;border-bottom:1.5px solid rgba(0,0,0,.25);overflow:hidden;}
+.writings-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(3.5rem,9vw,8rem);
+  line-height:.9;letter-spacing:-.02em;
+  display:flex;align-items:baseline;gap:.06em;
+}
+.wt-fill{color:#080004;}
+.wt-out{-webkit-text-stroke:2px #080004;color:transparent;}
+
+/* Paper stack */
+#paperStack{
+  position:relative;height:82vh;
+  border-bottom:1.5px solid rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.screenplay-bg{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  opacity:.06;font-size:10px;letter-spacing:.14em;color:#080004;
+  display:flex;flex-direction:column;gap:40px;padding:40px;
+  font-family:'IBM Plex Mono',monospace;
+}
+.paper{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  will-change:transform;
+}
+
+/* ── SCREENPLAY SHEET (shown first 1s then morphs into content) ── */
+.paper-screenplay{
+  width:min(640px,92vw);
+  background:#f2ebe0;
+  border:1.5px solid rgba(0,0,0,.25);
+  padding:40px 48px;
+  position:relative;
+  box-shadow:0 12px 60px rgba(0,0,0,.35),0 2px 0 rgba(0,0,0,.1);
+  font-family:'IBM Plex Mono',monospace;
+}
+/* subtle fold line at top of screenplay */
+.paper-screenplay::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.06),transparent);
+}
+.ps-header{
+  text-align:center;font-size:10px;letter-spacing:.18em;
+  color:rgba(0,0,0,.4);text-transform:uppercase;margin-bottom:24px;
+  border-bottom:1px solid rgba(0,0,0,.12);padding-bottom:12px;
+}
+.ps-slug{font-size:10px;font-weight:500;color:#080004;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;}
+.ps-action{font-size:11px;color:rgba(0,0,0,.65);line-height:2;margin-bottom:16px;}
+.ps-char{text-align:center;font-size:11px;font-weight:500;color:#080004;letter-spacing:.1em;margin-bottom:4px;}
+.ps-dial{text-align:center;font-size:11px;color:rgba(0,0,0,.6);padding:0 15%;line-height:1.8;margin-bottom:16px;font-style:italic;}
+.ps-fade-text{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.3);text-align:center;margin-top:20px;animation:blink 1s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:.7}}
+
+/* ── PAPER DOSSIER (revealed after screenplay morphs) ── */
+.paper-inner{overflow:hidden;word-break:break-word;
+  width:min(640px,92vw);
+  background:#e8d0d0;
+  border:1.5px solid rgba(0,0,0,.4);
+  padding:36px 44px;
+  position:relative;
+  box-shadow:0 12px 60px rgba(0,0,0,.35),0 2px 0 rgba(0,0,0,.15);
+}
+.paper-restricted{position:absolute;top:12px;right:16px;font-size:7px;letter-spacing:.28em;color:rgba(0,0,0,.45);text-transform:uppercase;border:1px solid rgba(0,0,0,.25);padding:2px 7px;background:rgba(0,0,0,.06);}
+.paper-archive{font-family:"NEOPIXEL",monospace;font-size:8px;letter-spacing:.18em;color:rgba(0,0,0,.45);text-transform:uppercase;margin-bottom:20px;display:flex;gap:16px;}
+.paper-title{font-family:'Anton',sans-serif;font-size:clamp(1.8rem,6vw,5rem);color:#080004;letter-spacing:-.01em;margin-bottom:8px;line-height:.95;overflow-wrap:break-word;}
+.paper-genre{font-family:"NEOPIXEL",monospace;font-size:9px;letter-spacing:.3em;color:rgba(0,0,0,.55);text-transform:uppercase;margin-bottom:24px;}
+.paper-gist{font-size:12px;line-height:2;color:rgba(0,0,0,.72);letter-spacing:.03em;max-width:500px;border-left:2.5px solid rgba(0,0,0,.4);padding-left:18px;margin-bottom:24px;}
+.paper-footer{display:flex;justify-content:space-between;border-top:1px solid rgba(0,0,0,.2);padding-top:12px;}
+.paper-ts{font-family:"NEOPIXEL",monospace;font-size:8px;letter-spacing:.12em;color:rgba(0,0,0,.45);}
+.paper-num{font-family:'Anton',sans-serif;font-size:2rem;color:rgba(0,0,0,.12);}
+
+/* ══════════════════════════════════════
+   CONTACT SECTION
+══════════════════════════════════════ */
+.contact-title{font-family:'Anton',sans-serif;font-size:clamp(2.5rem,7vw,6rem);color:#080004;line-height:.9;margin-bottom:10px;}
+.contact-sub{font-size:12px;line-height:2;color:rgba(0,0,0,.55);letter-spacing:.04em;max-width:400px;margin-bottom:40px;font-style:italic;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;}
+.c-link-col{padding:28px 24px;border-right:1.5px solid rgba(0,0,0,.25);}
+.c-form-col{padding:28px 24px;}
+.c-link{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1.5px solid rgba(0,0,0,.2);background:rgba(0,0,0,.06);text-decoration:none;cursor:none;transition:all .22s;margin-bottom:10px;}
+.c-link:hover{border-color:rgba(0,0,0,.45);background:rgba(0,0,0,.1);}
+.c-link-label{font-size:8px;letter-spacing:.2em;color:rgba(0,0,0,.45);text-transform:uppercase;}
+.c-link-val{font-size:11px;color:#080004;margin-top:2px;}
+.c-link-arrow{margin-left:auto;color:rgba(0,0,0,.35);font-size:14px;transition:color .22s;}
+.c-link:hover .c-link-arrow{color:#080004;}
+.c-form{display:flex;flex-direction:column;gap:10px;}
+.c-field{background:rgba(0,0,0,.06);border:1.5px solid rgba(0,0,0,.2);padding:10px 14px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#080004;outline:none;transition:border-color .2s;resize:none;}
+.c-field::placeholder{color:rgba(0,0,0,.3);}
+.c-field:focus{border-color:rgba(0,0,0,.55);}
+.c-submit{font-family:'Anton',sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;background:#080004;color:#cc0000;border:none;padding:12px 28px;cursor:pointer;transition:all .22s;align-self:flex-start;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,0.2);}
+.c-submit:hover{background:rgba(0,0,0,.85);}
+.c-success{font-size:11px;letter-spacing:.14em;color:#080004;border:1.5px solid rgba(0,0,0,.3);padding:10px 14px;display:none;}
+
+/* ══════════════════════════════════════
+   CLOSING
+══════════════════════════════════════ */
+#closing{padding:80px 24px 60px;text-align:center;position:relative;z-index:10;margin:0 10px;border-top:1.5px solid rgba(0,0,0,.25);border-left:1.5px solid rgba(0,0,0,.25);border-right:1.5px solid rgba(0,0,0,.25);}
+.closing-l1{font-family:'Anton',sans-serif;font-size:clamp(.9rem,2vw,1.4rem);color:rgba(0,0,0,.45);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;min-height:2.4em;line-height:1.9;}
+.closing-l2{font-family:'Anton',sans-serif;font-size:clamp(1.4rem,3.5vw,2.8rem);color:#080004;letter-spacing:.08em;margin-bottom:12px;min-height:1.4em;}
+.closing-l3{font-size:10px;letter-spacing:.2em;color:rgba(0,0,0,.45);text-transform:uppercase;margin-bottom:50px;min-height:1.4em;}
+.closing-sig{font-size:9px;letter-spacing:.28em;color:rgba(0,0,0,.3);text-transform:uppercase;}
+
+/* ── PAPER CARD — dual face (screenplay → dossier) ── */
+.paper{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  will-change:transform;
+}
+.paper-card{
+  position:relative;
+  width:min(640px,92vw);
+}
+.paper-face{
+  width:100%;
+  box-shadow:0 12px 60px rgba(0,0,0,.35),0 2px 0 rgba(0,0,0,.15);
+  border-radius:2px;
+}
+/* Screenplay face */
+.ps-face{
+  background:#f2ebe0;
+  border:1.5px solid rgba(0,0,0,.2);
+  padding:40px 48px;
+  font-family:'IBM Plex Mono',monospace;
+  position:relative;
+}
+.ps-face::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(0,0,0,.06),transparent);}
+.ps-header{font-family:'NEOPIXEL',monospace;text-align:center;font-size:9px;letter-spacing:.18em;color:rgba(0,0,0,.38);text-transform:uppercase;margin-bottom:24px;border-bottom:1px solid rgba(0,0,0,.1);padding-bottom:12px;}
+.ps-slug{font-size:10px;font-weight:500;color:#080004;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;}
+.ps-action{font-size:11px;color:rgba(0,0,0,.62);line-height:2;margin-bottom:16px;}
+.ps-char{text-align:center;font-size:11px;font-weight:500;color:#080004;letter-spacing:.1em;margin-bottom:4px;}
+.ps-dial{text-align:center;font-size:11px;color:rgba(0,0,0,.58);padding:0 15%;line-height:1.8;margin-bottom:16px;font-style:italic;}
+.ps-scroll-hint{font-family:'NEOPIXEL',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,0,0,.28);text-align:center;margin-top:20px;animation:blink 1.2s ease-in-out infinite;}
+/* Dossier face — hidden by default */
+.pd-face{
+  background:#e8d0d0;
+  border:1.5px solid rgba(0,0,0,.4);
+  padding:36px 44px;
+  position:absolute;top:0;left:0;right:0;
+  opacity:0;pointer-events:none;
+}
+/* When dossier is revealed */
+.pd-face.revealed{opacity:1;pointer-events:auto;position:relative;}
+.ps-face.hidden{display:none;}
+
+.ps-scroll-hint-anim{animation:blink 1.2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:.65}}
+
+/* ── THANK YOU PANEL ACTIONS ── */
+.ty-actions{
+  margin-top:44px;
+  display:flex;flex-direction:column;
+  align-items:flex-start;gap:16px;
+}
+.ty-sig{
+  font-family:'NEOPIXEL',monospace;
+  font-size:9px;letter-spacing:.3em;
+  color:rgba(200,60,60,.35);text-transform:uppercase;
+}
+/* ── PREMIERE PRO TIMELINE CSS ── */
+.ppr-wrap{width:92%;padding:10px;}
+.ppr-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(0,0,0,.2);}
+.ppr-title{font-family:'NEOPIXEL',monospace;font-size:8px;letter-spacing:.15em;color:rgba(0,0,0,.65);text-transform:uppercase;}
+.ppr-tc{font-family:'NEOPIXEL',monospace;font-size:10px;color:rgba(0,0,0,.75);letter-spacing:.1em;}
+.ppr-ruler{position:relative;height:14px;background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.15);margin-bottom:4px;}
+.ppr-tick{position:absolute;top:1px;font-family:'NEOPIXEL',monospace;font-size:7px;color:rgba(0,0,0,.4);transform:translateX(-50%);}
+.ppr-tick::before{content:'';position:absolute;bottom:-4px;left:50%;width:1px;height:4px;background:rgba(0,0,0,.25);}
+.ppr-playhead{position:absolute;top:22px;width:1px;background:#080004;box-shadow:0 0 4px rgba(0,0,0,.3);animation:playheadMove 8s linear infinite;z-index:5;bottom:0;}
+@keyframes playheadMove{0%{left:0%}100%{left:100%}}
+.ppr-tracks{display:flex;flex-direction:column;gap:3px;position:relative;}
+.ppr-track-row{display:flex;height:22px;align-items:stretch;}
+.ppr-track-label{font-family:'NEOPIXEL',monospace;font-size:8px;color:rgba(0,0,0,.55);width:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.15);}
+.ppr-track-area{flex:1;background:rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.12);position:relative;overflow:hidden;}
+.ppr-clip{position:absolute;top:1px;bottom:1px;display:flex;align-items:center;padding:0 6px;font-family:'NEOPIXEL',monospace;font-size:7px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;border-radius:1px;}
+.ppr-v{background:rgba(0,80,180,.55);color:rgba(255,255,255,.9);border-left:2px solid rgba(0,120,255,.8);}
+.ppr-v2{background:rgba(0,130,100,.45);color:rgba(255,255,255,.8);border-left:2px solid rgba(0,180,130,.7);}
+.ppr-a{background:rgba(180,80,0,.45);color:rgba(255,255,255,.8);border-left:2px solid rgba(255,120,0,.7);}
+.ppr-a2{background:rgba(140,0,140,.4);color:rgba(255,255,255,.8);border-left:2px solid rgba(200,0,200,.7);}
+.ppr-color-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.ppr-color-label{font-family:'NEOPIXEL',monospace;font-size:7px;letter-spacing:.06em;color:rgba(0,0,0,.5);width:72px;flex-shrink:0;text-transform:uppercase;}
+.ppr-color-bar{flex:1;height:6px;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.15);overflow:hidden;}
+.ppr-color-val{font-family:'NEOPIXEL',monospace;font-size:7px;color:rgba(0,0,0,.55);width:36px;text-align:right;}
+
+/* ── SCROLL REVEAL ── */
+.reveal,.reveal-left,.reveal-right{opacity:0;}
+
+/* ── THANK YOU SLIDER ── */
+#thankYouSlider{position:fixed;inset:0;z-index:8000;pointer-events:none;display:flex;align-items:flex-end;}
+#thankYouPanel{
+  width:100%;background:#080004;padding:80px 8vw 60px;
+  transform:translateY(100%);transition:transform .75s cubic-bezier(.86,0,.07,1);
+  position:relative;overflow:hidden;
+}
+#thankYouPanel.visible{transform:translateY(0);pointer-events:auto;}
+#thankYouPanel::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(180,0,30,.08) 0%,transparent 70%);}
+.ty-eyebrow{font-family:'NEOPIXEL',monospace;font-size:9px;letter-spacing:.28em;color:rgba(200,60,60,.6);text-transform:uppercase;margin-bottom:24px;}
+.ty-main{font-family:'Anton',sans-serif;font-size:clamp(2rem,5vw,4.5rem);line-height:1;margin-bottom:8px;}
+.ty-m1{color:rgba(240,220,220,.35);letter-spacing:-.01em;display:block;}
+.ty-m2{color:rgba(220,60,60,.8);letter-spacing:-.01em;display:block;}
+.ty-m3{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,60,60,.35);margin-top:20px;display:block;}
+.ty-sig{font-family:'NEOPIXEL',monospace;font-size:9px;letter-spacing:.3em;color:rgba(200,60,60,.22);text-transform:uppercase;margin-top:40px;}
+.ty-close{position:absolute;top:24px;right:32px;font-family:'NEOPIXEL',monospace;font-size:9px;letter-spacing:.2em;color:rgba(200,60,60,.4);cursor:none;border:1px solid rgba(200,60,60,.2);padding:6px 14px;transition:all .2s;background:none;}
+.ty-close:hover{color:rgba(220,60,60,.85);border-color:rgba(220,60,60,.5);}
+body.ty-active > *:not(#thankYouSlider):not(#cursor):not(#grain):not(#scanlines):not(#govCanvas):not(#transOverlay):not(.version-footer){
+  filter:blur(8px) brightness(.65);transition:filter .7s ease;
+}
+
+/* ── RETURN TO MS ── */
+.return-to-ms{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Anton',sans-serif;font-size:14px;letter-spacing:.12em;
+  text-transform:uppercase;color:#080004;
+  border:2px solid #080004;padding:14px 36px;
+  background:transparent;cursor:none;transition:all .25s;position:relative;
+}
+.return-to-ms::before,.return-to-ms::after{content:'';position:absolute;width:10px;height:10px;border-color:#080004;border-style:solid;}
+.return-to-ms::before{top:-3px;left:-3px;border-width:2px 0 0 2px;}
+.return-to-ms::after{bottom:-3px;right:-3px;border-width:0 2px 2px 0;}
+.return-to-ms:hover{background:#080004;color:#cc0000;}
+
+@keyframes vGlow{
+  0%,100%{text-shadow:0 0 0 transparent;}
+  50%{text-shadow:4px 0 0 rgba(0,0,0,.25),-4px 0 0 rgba(0,0,0,.15);}
+}
+
+/* ═══════════════════════════════════════
+   VWORLD CROSS-PLATFORM RESPONSIVE
+═══════════════════════════════════════ */
+
+* { -webkit-tap-highlight-color: transparent; }
+html { -webkit-overflow-scrolling: touch; }
+
+/* ── TOP STRIP — 3-col to stacked ── */
+@media (max-width: 900px) {
+  .top-strip {
+    grid-template-columns: 1fr 1fr !important;
+    height: auto !important;
+  }
+  .top-strip > *:nth-child(2) { display: none; }
+}
+@media (max-width: 600px) {
+  .top-strip { grid-template-columns: 1fr 1fr !important; height: auto !important; padding: 8px 0; }
+  .logo-text { font-size: 12px; }
+  .top-country { font-size: 8px; }
+}
+
+/* ── MAIN TITLE — scale for mobile ── */
+@media (max-width: 600px) {
+  .main-title { font-size: clamp(2.8rem, 16vw, 6rem) !important; white-space: normal !important; flex-wrap: wrap; }
+  .title-row { padding: 6px 10px 2px; }
+}
+
+/* ── 3-COL CONTENT GRID → stack on mobile ── */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hm-left { border-right: none !important; border-bottom: 1.5px solid rgba(0,0,0,.25); }
+  #cinPanel { aspect-ratio: 4/3; }
+}
+
+/* ── TAGLINES — smaller on mobile ── */
+@media (max-width: 600px) {
+  .tagline-text { font-size: clamp(1.8rem, 8vw, 3rem) !important; }
+  .tagline-block { padding: 10px 14px; }
+}
+
+/* ── V IDENTITY — scale ── */
+@media (max-width: 600px) {
+  .hero-identity .v-big, #vWorldContent [style*="font-size:clamp(4rem"] {
+    font-size: clamp(4rem, 18vw, 9rem) !important;
+  }
+}
+
+/* ── DOSSIER GRID — 2-col to 1-col ── */
+@media (max-width: 768px) {
+  .dossier-grid { grid-template-columns: 1fr !important; }
+  .dossier-block:nth-child(3) { border-top: 1.5px solid rgba(0,0,0,.25); }
+  .dossier-block:nth-child(4) { border-top: 1.5px solid rgba(0,0,0,.25); }
+  .about-projects { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 480px) {
+  .about-projects { grid-template-columns: 1fr !important; }
+  .ap-item { border-right: none !important; border-bottom: 1.5px solid rgba(0,0,0,.25); }
+}
+
+/* ── ABOUT TITLE — scale ── */
+@media (max-width: 600px) {
+  .about-title-row { padding: 6px 10px 2px; }
+  .about-big, .about-v-out { font-size: clamp(2.5rem, 12vw, 6rem) !important; }
+}
+
+/* ── WRITINGS TITLE ── */
+@media (max-width: 600px) {
+  .writings-title { font-size: clamp(2.5rem, 12vw, 6rem) !important; }
+  .writings-header { flex-direction: column; gap: 12px; }
+}
+
+/* ── PAPER STACK — mobile ── */
+@media (max-width: 768px) {
+  #paperStack { height: 75vh; }
+  .paper-inner, .ps-face { padding: 24px 22px !important; }
+  .paper-title { font-size: clamp(1.8rem, 8vw, 3.5rem) !important; }
+  .paper-gist { max-width: 100% !important; font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .ps-dial { padding: 0 5% !important; font-size: 10px !important; }
+  .ps-action { font-size: 10px !important; }
+}
+
+/* ── CONTACT GRID — stack ── */
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr !important; }
+  .c-link-col { border-right: none !important; border-bottom: 1.5px solid rgba(0,0,0,.25); }
+}
+
+/* ── THANK YOU PANEL ── */
+@media (max-width: 600px) {
+  #thankYouPanel { padding: 50px 20px 40px; }
+  .ty-main { font-size: clamp(1.5rem, 7vw, 3rem) !important; }
+}
+
+/* ── VERSION FOOTER — smaller on mobile ── */
+@media (max-width: 600px) {
+  .version-footer { font-size: 7px; bottom: 10px; right: 12px; }
+}
+
+/* ── FRAME MARGIN — reduce on mobile ── */
+@media (max-width: 600px) {
+  .frame { margin: 4px; }
+  .section-frame { margin: 0 4px; }
+}
+
+/* ── SECTION PADDING ── */
+@media (max-width: 768px) {
+  #about-section { padding-left: 0; padding-right: 0; }
+  .about-title-wrap { padding-top: 60px !important; }
+  .dossier-block { padding: 22px 18px; }
+}
+
+/* ── TV / ULTRAWIDE ── */
+@media (min-width: 2000px) {
+  .frame { margin: 20px; }
+  .main-title { font-size: clamp(8rem, 12vw, 18rem) !important; }
+  .content-grid { grid-template-columns: 2fr 1.4fr 2.2fr; }
+}
+
+/* ── TABLET ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .content-grid { grid-template-columns: 1fr 1fr !important; }
+  .hm-left { border-right: 1.5px solid rgba(0,0,0,.25); }
+  .cg-col:last-child { grid-column: 1 / -1; }
+}
+
+/* ── TOUCH scroll on paper stack ── */
+@media (hover: none) {
+  #paperStack { touch-action: none; }
+  .paper { touch-action: none; }
+}
+
+/* ── SAFE AREA / NOTCH / FULLSCREEN ── */
+:root{
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+}
+html,body{
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+}
+/* Sections that touch the bottom edge */
+body > *:last-child,
+#closing, #closing-wrap, .section-frame:last-of-type {
+  padding-bottom: calc(60px + var(--sab)) !important;
+}
+/* Fixed bottom elements clear the home indicator */
+.clock, .version-footer, #progressRail {
+  bottom: calc(20px + var(--sab)) !important;
+}
+/* Fixed top elements clear the status bar */
+.hdr { padding-top: calc(0px + var(--sat)); }
+/* Thank you panel bottom padding */
+#thankYouPanel {
+  padding-bottom: calc(60px + var(--sab)) !important;
+}
+/* Boot screen bottom status */
+#bootStatus { bottom: calc(28px + var(--sab)) !important; }
+#loadStatus  { bottom: calc(28px + var(--sab)) !important; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor">
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+    <polygon points="28,15 10,6 14,15 10,24" fill="#080004" opacity=".9"/>
+    <line x1="14" y1="15" x2="2" y2="15" stroke="#080004" stroke-width="1.5" opacity=".6"/>
+    <line x1="8" y1="10.5" x2="8" y2="19.5" stroke="#080004" stroke-width="1" opacity=".4"/>
+    <circle cx="28" cy="15" r="1.2" fill="rgba(0,0,0,.7)"/>
+  </svg>
+</div>
+
+<canvas id="grain"></canvas>
+<div id="scanlines"></div>
+<canvas id="govCanvas" style="position:fixed;inset:0;z-index:9000;pointer-events:none;"></canvas>
+<div id="transOverlay"></div>
+<div class="version-footer">VERSION : 21.07.06-MS.7</div>
+
+<!-- ══════════════════════════════════════
+     HERO FRAME
+══════════════════════════════════════ -->
+<div class="frame">
+
+  <!-- Top strip -->
+  <div class="top-strip">
+    <div>
+      <span class="logo-text">ALTER<span>EGO</span></span>
+    </div>
+    <div>
+      <span class="top-coords">10.7905°N / 78.7047°E &nbsp;&nbsp; SHOLINGHUR — TAMIL NADU</span>
+    </div>
+    <div>
+      <span class="top-country">IDENTITY_B</span>
+    </div>
+  </div>
+
+  <!-- Giant title -->
+  <div class="title-row">
+    <div class="main-title">
+      <span class="mt-fill t-toggle">ALTER</span>
+      <span class="mt-outline t-toggle">—EGO</span>
+    </div>
+  </div>
+
+  <!-- 3-col content grid -->
+  <div class="content-grid">
+
+    <!-- LEFT COL -->
+    <div class="cg-col">
+      <div class="tagline-block">
+        <span class="tagline-text t-toggle">CONTAINED.</span>
+      </div>
+      <div class="tagline-block">
+        <span class="tagline-text t-toggle">CORRUPTED.</span>
+      </div>
+      <div class="tagline-block" style="border-bottom:none;flex:1;">
+        <span class="tagline-text t-toggle">UNLEASHED.</span>
+      </div>
+      <!-- Button + meta at bottom -->
+      <div class="cell" style="margin-top:auto;">
+        <div style="margin-bottom:16px;">
+          <button class="exec-btn cyan-leak" id="returnBtn">&gt;_RETURN_TO_NERD</button>
+        </div>
+        <div class="small-meta" style="margin-bottom:6px;">&gt; IDENTITY_B_LOADED</div>
+        <div class="small-meta">CREATIVE_DAEMON : UNSTABLE</div>
+      </div>
+    </div>
+
+    <!-- MID COL — cinematic panel -->
+    <div class="cg-col">
+      <div class="cin-panel-wrap">
+        <div id="cinPanel">
+          <!-- State 0: Clapboard -->
+          <div class="cp-state active" id="cp0">
+            <div class="cpb-flap"><div class="cpb-flap-txt"><span>SCENE V</span><span>TAKE ∞</span></div></div>
+            <div class="cpb-body">
+              <div class="cpb-title">V</div>
+              <div class="cpb-row"><span>IDENTITY</span><span>B — CREATIVE</span></div>
+              <div class="cpb-row"><span>DIRECTOR</span><span>VISHAAL M S</span></div>
+              <div class="cpb-row"><span>SCENE</span><span>ALTER EGO REVEAL</span></div>
+            </div>
+          </div>
+          <!-- State 1: Premiere Pro Timeline -->
+          <div class="cp-state" id="cp1">
+            <div class="ppr-wrap">
+              <div class="ppr-header">
+                <span class="ppr-title">SEQUENCE_01 // V_EDIT.prproj</span>
+                <span class="ppr-tc">00:24:16:08</span>
+              </div>
+              <div class="ppr-ruler">
+                <div class="ppr-tick" style="left:0%">00:00</div>
+                <div class="ppr-tick" style="left:25%">06:00</div>
+                <div class="ppr-tick" style="left:50%">12:00</div>
+                <div class="ppr-tick" style="left:75%">18:00</div>
+              </div>
+              <div class="ppr-playhead" id="pprHead"></div>
+              <div class="ppr-tracks">
+                <div class="ppr-track-row">
+                  <div class="ppr-track-label">V1</div>
+                  <div class="ppr-track-area">
+                    <div class="ppr-clip ppr-v" style="left:2%;width:28%;">LEONE — INT. ROOM</div>
+                    <div class="ppr-clip ppr-v" style="left:32%;width:22%;">ADHEERA — BATTLE</div>
+                    <div class="ppr-clip ppr-v" style="left:56%;width:18%;">D.A. — ROAD</div>
+                    <div class="ppr-clip ppr-v" style="left:76%;width:20%;">YOURS TRULY — CAFE</div>
+                  </div>
+                </div>
+                <div class="ppr-track-row">
+                  <div class="ppr-track-label">V2</div>
+                  <div class="ppr-track-area">
+                    <div class="ppr-clip ppr-v2" style="left:5%;width:15%;opacity:.6;">B-ROLL_01</div>
+                    <div class="ppr-clip ppr-v2" style="left:38%;width:12%;opacity:.6;">INSERT_02</div>
+                    <div class="ppr-clip ppr-v2" style="left:60%;width:18%;opacity:.6;">CUTAWAY_03</div>
+                  </div>
+                </div>
+                <div class="ppr-track-row">
+                  <div class="ppr-track-label">A1</div>
+                  <div class="ppr-track-area">
+                    <div class="ppr-clip ppr-a" style="left:0%;width:100%;">AMBIENT_NOIR_SCORE.wav</div>
+                  </div>
+                </div>
+                <div class="ppr-track-row">
+                  <div class="ppr-track-label">A2</div>
+                  <div class="ppr-track-area">
+                    <div class="ppr-clip ppr-a2" style="left:2%;width:28%;opacity:.7;">LEONE_VO.wav</div>
+                    <div class="ppr-clip ppr-a2" style="left:56%;width:36%;opacity:.7;">D.A._DIALOGUE.wav</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- State 2: Screenplay -->
+          <div class="cp-state" id="cp2">
+            <div class="cps-doc">
+              <div class="cps-slug">INT. ROOM — NIGHT</div>
+              <div>A man stares at a blank page.</div>
+              <br>
+              <div class="cps-char">V</div>
+              <div class="cps-dial">"Systems create their own monsters."</div>
+              <br>
+              <div class="cps-slug">CUT TO BLACK.</div>
+            </div>
+          </div>
+          <!-- State 3: Storyboard -->
+          <div class="cp-state" id="cp3">
+            <div class="cpt-label">STORYBOARD // FRAGMENT</div>
+            <div class="cpsb-grid">
+              <div class="cpsb-frame" data-n="01">EST.</div>
+              <div class="cpsb-frame" data-n="02">C.U.</div>
+              <div class="cpsb-frame" data-n="03">WIDE</div>
+              <div class="cpsb-frame" data-n="04">INT.</div>
+              <div class="cpsb-frame" data-n="05">CUT</div>
+              <div class="cpsb-frame" data-n="06">???</div>
+            </div>
+          </div>
+          <!-- State 4: Color Grade Panel -->
+          <div class="cp-state" id="cp4">
+            <div class="ppr-wrap">
+              <div class="ppr-header"><span class="ppr-title">LUMETRI COLOR // NOIR_GRADE</span></div>
+              <div style="display:flex;flex-direction:column;gap:8px;padding:8px 0;">
+                <div class="ppr-color-row"><span class="ppr-color-label">EXPOSURE</span><div class="ppr-color-bar"><div style="width:42%;background:rgba(0,0,0,.55);height:100%;"></div></div><span class="ppr-color-val">-0.8</span></div>
+                <div class="ppr-color-row"><span class="ppr-color-label">CONTRAST</span><div class="ppr-color-bar"><div style="width:78%;background:rgba(0,0,0,.55);height:100%;"></div></div><span class="ppr-color-val">+32</span></div>
+                <div class="ppr-color-row"><span class="ppr-color-label">SHADOWS</span><div class="ppr-color-bar"><div style="width:22%;background:rgba(0,0,0,.55);height:100%;"></div></div><span class="ppr-color-val">-55</span></div>
+                <div class="ppr-color-row"><span class="ppr-color-label">HIGHLIGHTS</span><div class="ppr-color-bar"><div style="width:65%;background:rgba(0,0,0,.55);height:100%;"></div></div><span class="ppr-color-val">+12</span></div>
+                <div class="ppr-color-row"><span class="ppr-color-label">SATURATION</span><div class="ppr-color-bar"><div style="width:35%;background:rgba(120,0,0,.6);height:100%;"></div></div><span class="ppr-color-val">0.7</span></div>
+                <div class="ppr-color-row"><span class="ppr-color-label">TEMPERATURE</span><div class="ppr-color-bar"><div style="width:30%;background:rgba(80,0,0,.5);height:100%;"></div></div><span class="ppr-color-val">-800K</span></div>
+              </div>
+            </div>
+          </div>
+          <div id="panelGlitch"></div>
+        </div>
+      </div>
+      <!-- Mid bottom — body text like utopiatokyo -->
+      <div class="cell fill">
+        <div class="small-meta" style="margin-bottom:10px;">CONTAINED IDENTITY</div>
+        <div class="small-text">The technical world promised precision.<br>Logic. Order. Containment.<br>The creative daemon had other plans.<br>This page is what leaked through the cracks<br>of a perfectly engineered system.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT COL — works + V identity -->
+    <div class="cg-col">
+      <!-- V identity panel -->
+      <div class="cell" style="padding:20px 24px;border-bottom:1.5px solid rgba(0,0,0,.25);">
+        <div style="display:flex;align-items:baseline;gap:.04em;">
+          <span style="font-family:'Anton',sans-serif;font-size:clamp(4rem,10vw,9rem);color:#080004;line-height:.85;letter-spacing:-.02em;animation:vGlow 3s ease-in-out infinite;" class="t-toggle">V</span>
+          <span style="font-family:'Anton',sans-serif;font-size:clamp(1.5rem,3.5vw,3rem);color:rgba(0,0,0,.18);letter-spacing:.06em;align-self:flex-end;padding-bottom:.12em;filter:blur(.6px);">ISHAAL</span>
+        </div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(.8rem,1.6vw,1.2rem);letter-spacing:.22em;color:rgba(0,0,0,.5);text-transform:uppercase;margin-top:6px;" class="t-toggle">SCREENWRITER • NOVELIST • STORYTELLER</div>
+      </div>
+      <!-- Works list -->
+      <div class="work-item t-toggle" id="wk0"><span class="work-title">ADHEERA</span><span class="work-meta">HISTORICAL EPIC · தமிழ்</span></div>
+      <div class="work-item t-toggle" id="wk1"><span class="work-title">LEONE</span><span class="work-meta">PSYCHOLOGICAL NOIR</span></div>
+      <div class="work-item t-toggle" id="wk2"><span class="work-title">D.A.</span><span class="work-meta">DARK ACTION THRILLER</span></div>
+      <div class="work-item t-toggle" id="wk3" style="border-bottom:none;flex:1;"><span class="work-title">YOURS TRULY</span><span class="work-meta">CINEMATIC DRAMA</span></div>
+    </div>
+
+  </div><!-- /content-grid -->
+</div><!-- /frame -->
+
+<!-- ══════════════════════════════════════
+     ABOUT SECTION
+══════════════════════════════════════ -->
+<div class="section-frame" id="about-section">
+    <div><span class="small-meta">PROFILE_STATUS : ACTIVE · ARCHIVE_LEVEL : RESTRICTED</span></div>
+    <div><span class="small-meta">MEMORY_FRAGMENT : LOADED</span></div>
+  </div>
+
+  <div class="about-title-row">
+    <div class="about-title">
+      <span class="at-fill t-toggle">ABOUT</span>
+      <span class="at-out t-toggle">V</span>
+    </div>
+  </div>
+
+  <div class="dossier-grid">
+    <div class="dossier-block">
+      <div class="db-restricted">RESTRICTED</div>
+      <div class="db-id">FILE_01 // ORIGIN</div>
+      <div class="db-title t-toggle">ORIGIN POINT</div>
+      <div class="db-content">Engineering student by system.<br>Storyteller by instinct.<br><em>Both identities coexist.</em><br>Both fight for dominance.<br><br>V emerged from the collision of<br><em>code and cinema</em> — logic and chaos —<br>containment and expression.</div>
+      <div class="db-quote">"Identity is just another editable timeline."</div>
+    </div>
+    <div class="dossier-block">
+      <div class="db-restricted">CLASSIFIED</div>
+      <div class="db-id">FILE_02 // CINEMATIC_DNA</div>
+      <div class="db-title t-toggle">CINEMATIC DNA</div>
+      <div class="db-content"><em>Neo-noir.</em> Psychological thrillers.<br>Mass cinema elevated to art.<br>Identity collapse themes.<br>Emotionally layered storytelling.<br><br>Every frame is a psychological act.<br>Every story is a contained explosion.</div>
+      <div class="db-quote">"Cinema is controlled hallucination."</div>
+    </div>
+    <div class="dossier-block">
+      <div class="db-restricted">MEMORY_FRAGMENT</div>
+      <div class="db-id">FILE_03 // SYSTEM_CONFLICT</div>
+      <div class="db-title t-toggle">SYSTEM CONFLICT</div>
+      <div class="db-content"><em>TECHNICAL WORLD:</em> precision, order,<br>logic, containment, structure.<br><br><em>CREATIVE DAEMON:</em> chaos, instinct,<br>narrative obsession, emotional rupture.<br><br>This page is what leaked through.</div>
+      <div class="db-quote">"Systems create their own monsters."</div>
+    </div>
+    <div class="dossier-block">
+      <div class="db-restricted">UNSTABLE</div>
+      <div class="db-id">FILE_04 // PERSONALITY</div>
+      <div class="db-title t-toggle">PERSONALITY MATRIX</div>
+      <div class="db-traits">
+        <div class="db-trait"><span class="dt-l">TRAIT_01</span><span class="dt-v">Overthinks every narrative beat</span></div>
+        <div class="db-trait"><span class="dt-l">TRAIT_02</span><span class="dt-v">Cinematic framing obsession</span></div>
+        <div class="db-trait"><span class="dt-l">TRAIT_03</span><span class="dt-v">Emotionally driven worldbuilding</span></div>
+        <div class="db-trait"><span class="dt-l">TRAIT_04</span><span class="dt-v">Experimental interaction philosophy</span></div>
+        <div class="db-trait"><span class="dt-l">TRAIT_05</span><span class="dt-v">Controlled chaos creator</span></div>
+        <div class="db-trait"><span class="dt-l">STATUS</span><span class="dt-v"><em>CREATIVE_DAEMON : ACTIVE</em></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-projects">
+    <div class="ap-item"><span class="ap-title t-toggle">LEONE</span><div class="ap-genre">PSYCHOLOGICAL NOIR</div><span class="ap-status">ACTIVE_DRAFT</span></div>
+    <div class="ap-item"><span class="ap-title t-toggle">ADHEERA</span><div class="ap-genre">HISTORICAL EPIC · தமிழ்</div><span class="ap-status">IN_PROGRESS</span></div>
+    <div class="ap-item"><span class="ap-title t-toggle">D.A.</span><div class="ap-genre">DARK ACTION THRILLER</div><span class="ap-status">TREATMENT_LOCKED</span></div>
+    <div class="ap-item" style="border-right:none;"><span class="ap-title t-toggle">YOURS TRULY</span><div class="ap-genre">CINEMATIC DRAMA</div><span class="ap-status">DRAFTING</span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     WRITINGS SECTION
+══════════════════════════════════════ -->
+<div class="section-frame" id="writings-section">
+    <div><span class="small-meta">SECTION_03 // ARCHIVE</span></div>
+    <div><span class="small-meta">ARCHIVE_STATUS : UNSEALED · SCREENPLAY_DOSSIER : RESTRICTED</span></div>
+    <div><span class="small-meta">NARRATIVE_ENGINE : ACTIVE</span></div>
+  </div>
+
+  <div class="writings-title-row">
+    <div class="writings-title">
+      <span class="wt-fill t-toggle">MY</span>
+      <span class="wt-out t-toggle">WRITINGS</span>
+    </div>
+  </div>
+
+  <div id="paperStack">
+    <div class="screenplay-bg">
+      <div>INT. ROOM — NIGHT</div><div>CUT TO:</div><div>FADE IN:</div>
+      <div>SUBJECT UNSTABLE</div><div>IDENTITY COLLAPSE DETECTED</div>
+      <div>EXT. HIGHWAY — DUSK</div>
+    </div>
+
+    <!-- PAPER 3 — bottom of stack -->
+    <div class="paper" id="paper3">
+      <div class="paper-card" id="card3">
+        <!-- FACE A: Screenplay (shown first) -->
+        <div class="paper-face ps-face" id="ps3">
+          <div class="ps-header">SCREENPLAY ARCHIVE // V PRODUCTIONS · 2026</div>
+          <div class="ps-slug">EXT. CITY — DUSK</div>
+          <div class="ps-action">A woman sits in a café. Two cups. One empty. The other — untouched. Ten years between them.</div>
+          <div class="ps-char">V (V.O.)</div>
+          <div class="ps-dial">"Some feelings don't have names. They just have addresses."</div>
+          <div class="ps-slug">CUT TO:</div>
+          <div class="ps-action">Years blur. The cups remain.</div>
+          <div class="ps-scroll-hint">↓ SCROLL TO REVEAL</div>
+        </div>
+        <!-- FACE B: Dossier (revealed on scroll) -->
+        <div class="paper-face pd-face" id="pd3">
+          <div class="paper-restricted">RESTRICTED ACCESS</div>
+          <div class="paper-archive"><span>ARCHIVE_ID: VW-004</span><span>2024.∞</span></div>
+          <div class="paper-title t-toggle">YOURS TRULY</div>
+          <div class="paper-genre">CINEMATIC DRAMA</div>
+          <div class="paper-gist">Two people. One café. Ten years of unspoken truth between them. A love story that refuses to call itself one — because naming it would destroy it.</div>
+          <div class="paper-footer"><div class="paper-ts">LOG: 2024-∞ · EMOTIONAL_ARCHIVE · DRAFT_03</div><div class="paper-num">04</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAPER 2 -->
+    <div class="paper" id="paper2">
+      <div class="paper-card" id="card2">
+        <div class="paper-face ps-face" id="ps2">
+          <div class="ps-header">SCREENPLAY ARCHIVE // V PRODUCTIONS · 2026</div>
+          <div class="ps-slug">INT. INTERROGATION ROOM — NIGHT</div>
+          <div class="ps-action">She doesn't flinch. The suspect does. That's the difference between a cop and what she became.</div>
+          <div class="ps-char">SHARMILI</div>
+          <div class="ps-dial">"I didn't break the system. The system was already broken. I just learned its language."</div>
+          <div class="ps-slug">SMASH CUT TO: SÃO PAULO.</div>
+          <div class="ps-action">Rain. A city that eats its own.</div>
+          <div class="ps-scroll-hint">↓ SCROLL TO REVEAL</div>
+        </div>
+        <div class="paper-face pd-face" id="pd2">
+          <div class="paper-restricted">RESTRICTED ACCESS</div>
+          <div class="paper-archive"><span>ARCHIVE_ID: VW-003</span><span>2025.SAO_PAULO</span></div>
+          <div class="paper-title t-toggle">D.A.</div>
+          <div class="paper-genre">DARK ACTION THRILLER · SÃO PAULO</div>
+          <div class="paper-gist">A cop. A mission. A system that was the crime all along. Sharmili doesn't investigate corruption — she was built by it.</div>
+          <div class="paper-footer"><div class="paper-ts">LOG: 2025-∞ · SAO_PAULO_ARCHIVE · DRAFT_02</div><div class="paper-num">03</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAPER 1 -->
+    <div class="paper" id="paper1">
+      <div class="paper-card" id="card1">
+        <div class="paper-face ps-face" id="ps1">
+          <div class="ps-header">SCREENPLAY ARCHIVE // V PRODUCTIONS · 2026</div>
+          <div class="ps-slug">EXT. BATTLEFIELD — DAWN — 1258 AD</div>
+          <div class="ps-action">Ten thousand horses. One warrior. The Mongols don't conquer land. They erase identity.</div>
+          <div class="ps-char">DHEERAN (V.O.)</div>
+          <div class="ps-dial">"ஒரு இனம் தோற்றால் போர் தோற்றது. ஆனால் கதை தோற்கவில்லை."</div>
+          <div class="ps-slug">FADE TO:</div>
+          <div class="ps-action">Ruins. But the stories remain carved in stone.</div>
+          <div class="ps-scroll-hint">↓ SCROLL TO REVEAL</div>
+        </div>
+        <div class="paper-face pd-face" id="pd1">
+          <div class="paper-restricted">RESTRICTED ACCESS</div>
+          <div class="paper-archive"><span>ARCHIVE_ID: VW-002</span><span>2023.MONGOLIA</span></div>
+          <div class="paper-title t-toggle">ADHEERA</div>
+          <div class="paper-genre">HISTORICAL EPIC · தமிழ்</div>
+          <div class="paper-gist">A kingdom falls. A warrior rises. An invasion that doesn't just conquer land — it dismantles identity. Written in Tamil. Felt in blood.</div>
+          <div class="paper-footer"><div class="paper-ts">LOG: 2023-∞ · HISTORICAL_ARCHIVE · DRAFT_04</div><div class="paper-num">02</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAPER 0 — TOP (shown first) -->
+    <div class="paper" id="paper0">
+      <div class="paper-card" id="card0">
+        <div class="paper-face ps-face" id="ps0">
+          <div class="ps-header">SCREENPLAY ARCHIVE // V PRODUCTIONS · 2026</div>
+          <div class="ps-slug">INT. LEONE'S APARTMENT — NIGHT</div>
+          <div class="ps-action">The city never stops bleeding. Leone stopped counting the bodies years ago. The only thing worse than the monsters is knowing who made them.</div>
+          <div class="ps-char">LEONE</div>
+          <div class="ps-dial">"Systems create their own monsters. I'm just the one they forgot to contain."</div>
+          <div class="ps-slug">CUT TO BLACK.</div>
+          <div class="ps-action">Somewhere outside, the city breathes its last honest breath.</div>
+          <div class="ps-scroll-hint">↓ SCROLL TO REVEAL</div>
+        </div>
+        <div class="paper-face pd-face" id="pd0">
+          <div class="paper-restricted">RESTRICTED ACCESS</div>
+          <div class="paper-archive"><span>ARCHIVE_ID: VW-001</span><span>2024.CLASSIFIED</span></div>
+          <div class="paper-title t-toggle">LEONE</div>
+          <div class="paper-genre">PSYCHOLOGICAL NOIR</div>
+          <div class="paper-gist">A broken man hunts the monsters the system created — not knowing he became the most dangerous one of all. Justice and revenge, both served cold.</div>
+          <div class="paper-footer"><div class="paper-ts">LOG: 2024-∞ · NOIR_ARCHIVE · DRAFT_05</div><div class="paper-num">01</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /paperStack -->
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CONTACT SECTION
+══════════════════════════════════════ -->
+<div class="section-frame" id="contact-section">
+  <div class="section-topstrip">
+    <div><span class="small-meta">SECTION_04 // TRANSMISSION</span></div>
+    <div><span class="small-meta">OPEN_CHANNEL // TRANSMISSION_ACTIVE</span></div>
+    <div><span class="small-meta">STATUS : AWAITING_SIGNAL</span></div>
+  </div>
+
+  <div class="about-title-row">
+    <div class="about-title">
+      <span class="at-fill t-toggle">OPEN</span>
+      <span class="at-out t-toggle">CHANNEL</span>
+    </div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="c-link-col">
+      <div class="small-text" style="margin-bottom:24px;font-style:italic;color:rgba(0,0,0,.6);">"Some stories are written.<br>Some are survived."</div>
+      <a class="c-link" href="mailto:msvishaal631102@gmail.com">
+        <div><div class="c-link-label">Email</div><div class="c-link-val">msvishaal631102@gmail.com</div></div>
+        <div class="c-link-arrow">→</div>
+      </a>
+      <a class="c-link" href="https://github.com/itsmsvhere" target="_blank">
+        <div><div class="c-link-label">GitHub</div><div class="c-link-val">itsmsvhere</div></div>
+        <div class="c-link-arrow">→</div>
+      </a>
+      <a class="c-link" href="https://www.linkedin.com/in/itsmsvhere/" target="_blank">
+        <div><div class="c-link-label">LinkedIn</div><div class="c-link-val">itsmsvhere</div></div>
+        <div class="c-link-arrow">→</div>
+      </a>
+    </div>
+    <div class="c-form-col">
+      <form class="c-form" id="cForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="08330a1d-56fc-40ff-a126-477ee0c6dfb2"/>
+        <input type="hidden" name="subject" value="V World — Transmission"/>
+        <input type="hidden" name="redirect" value="false"/>
+        <input type="text" name="_honey" style="display:none"/>
+        <input class="c-field" type="text" name="name" placeholder="DESIGNATION // NAME" required/>
+        <input class="c-field" type="email" name="email" placeholder="CHANNEL // EMAIL" required/>
+        <textarea class="c-field" name="message" rows="4" placeholder="TRANSMISSION // MESSAGE" required></textarea>
+        <button class="c-submit" type="submit" id="cSubmit">TRANSMIT</button>
+        <div class="c-success" id="cSuccess">✓ TRANSMISSION RECEIVED</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══ THANK YOU SLIDER ══ -->
+<div id="thankYouSlider">
+  <div id="thankYouPanel">
+    <button class="ty-close" id="tyClose">[ CLOSE ]</button>
+    <div class="ty-eyebrow">TRANSMISSION_END // MESSAGE_RECEIVED</div>
+    <div class="ty-main">
+      <span class="ty-m1" id="tyL1"></span>
+      <span class="ty-m2" id="tyL2"></span>
+    </div>
+    <span class="ty-m3" id="tyL3"></span>
+    <div class="ty-actions">
+      <button class="return-to-ms" id="returnToMs">← RETURN TO MS</button>
+      <div class="ty-sig">made by MSV ; 2026</div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// CURSOR
+const cur=document.getElementById('cursor');
+const _isTouch=window.matchMedia('(hover:none) and (pointer:coarse)').matches;
+if(_isTouch&&cur){cur.style.display='none';}
+// Fallback: hide on first touch anywhere
+document.addEventListener('touchstart',()=>{
+  if(cur) cur.style.display='none';
+  document.body.style.cursor='auto';
+},{once:true,passive:true});
+let mx=window.innerWidth/2,my=window.innerHeight/2;
+window.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';requestAnimationFrame(t);})();
+
+// GRAIN
+const gc=document.getElementById('grain');
+gc.style.cssText='position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.035;mix-blend-mode:multiply;width:100%;height:100%;';
+gc.width=280;gc.height=280;
+const gx=gc.getContext('2d');
+(function dg(){
+  const img=gx.createImageData(280,280);
+  for(let i=0;i<img.data.length;i+=4){const v=Math.random()*255|0;img.data[i]=v;img.data[i+1]=0;img.data[i+2]=0;img.data[i+3]=255;}
+  gx.putImageData(img,0,0);requestAnimationFrame(dg);
+})();
+
+// GLITCH CANVAS
+const gov=document.getElementById('govCanvas');
+gov.width=window.innerWidth;gov.height=window.innerHeight;
+window.addEventListener('resize',()=>{gov.width=window.innerWidth;gov.height=window.innerHeight;});
+const govx=gov.getContext('2d');
+function strike(intensity){
+  govx.clearRect(0,0,gov.width,gov.height);
+  const n=(3+intensity*10)|0;
+  for(let i=0;i<n;i++){
+    const y=Math.random()*gov.height,h=(Math.random()*5+1)|0;
+    govx.fillStyle=`rgba(0,0,0,${.15+intensity*.25})`;
+    govx.fillRect(0,y,gov.width,h);
+  }
+  setTimeout(()=>govx.clearRect(0,0,gov.width,gov.height),60);
+}
+
+// T-TOGGLE
+document.querySelectorAll('.t-toggle').forEach(el=>{
+  el.addEventListener('click',()=>{
+    el.classList.toggle('outlined');
+    el.style.filter='drop-shadow(3px 0 0 rgba(0,0,0,.4)) drop-shadow(-3px 0 0 rgba(0,0,0,.2))';
+    strike(.35);
+    setTimeout(()=>{el.style.filter='';},160);
+  });
+});
+
+// CINEMATIC PANEL CYCLE
+const cpStates=document.querySelectorAll('.cp-state');
+const pg=document.getElementById('panelGlitch');
+pg.style.cssText='position:absolute;inset:0;z-index:5;display:none;pointer-events:none;';
+let cpCur=0,cpBusy=false;
+function cyclePanel(){
+  if(cpBusy)return;cpBusy=true;
+  pg.style.display='block';
+  let gc2=0;
+  const iv=setInterval(()=>{
+    gc2++;
+    pg.style.background=`rgba(0,0,0,${.08+Math.random()*.12})`;
+    pg.style.transform=`translate(${((Math.random()-.5)*8).toFixed(1)}px,0)`;
+    if(gc2>9){
+      clearInterval(iv);pg.style.display='none';pg.style.transform='none';
+      cpStates[cpCur].classList.remove('active');
+      cpCur=(cpCur+1)%cpStates.length;
+      cpStates[cpCur].classList.add('active');
+      cpBusy=false;
+    }
+  },50);
+}
+setInterval(cyclePanel,4000);
+
+// SCREENPLAY → DOSSIER per paper — called when paper is the active top card
+function revealDossier(idx, onDone){
+  const ps = document.getElementById('ps'+idx);
+  const pd = document.getElementById('pd'+idx);
+  if(!ps||!pd) return;
+  // Rapid glitch frames — screenplay shakes then snaps to dossier
+  let gf=0;
+  const giv=setInterval(()=>{
+    gf++;
+    const jx=((Math.random()-.5)*22).toFixed(1);
+    const sy=((.82+Math.random()*.3).toFixed(2));
+    ps.style.transform=`translate(${jx}px,0) scaleX(${sy})`;
+    ps.style.opacity=(Math.random()>.45?.88:.08)+'';
+    strike(.75);
+    if(gf>12){
+      clearInterval(giv);
+      ps.style.display='none';
+      pd.classList.add('revealed');
+      ps.classList.add('hidden');
+      setTimeout(()=>{ onDone&&onDone(); }, 350);
+    }
+  },48);
+}
+
+// ── PAPER SCROLL LOCK ENGINE ─────────────────────────────────
+// Papers order: paper0 = top (shown first), paper3 = bottom
+const PAPERS_ORDER = [0,1,2,3]; // process top-to-bottom
+let paperState = {
+  current: 0,           // index into PAPERS_ORDER
+  phase: 'screenplay',  // 'screenplay' | 'dossier' | 'fly' | 'done'
+  locked: false,        // is scroll locked?
+  wheelAcc: 0,          // accumulated wheel delta
+  flying: false,
+};
+const WHEEL_THRESH = 220; // how much scroll needed to trigger action
+
+// Lock scroll: prevent page movement but capture wheel
+function lockScroll(){
+  document.body.style.overflow='hidden';
+  document.body.style.touchAction='none'; // prevent iOS scroll
+  paperState.locked=true;
+}
+function unlockScroll(){
+  document.body.style.overflow='';
+  document.body.style.touchAction='';
+  paperState.locked=false;
+  paperState.wheelAcc=0;
+}
+
+// Stack initial rotations
+const ROTS=[0, -.8, .6, -1.2];
+const YOFFS=[0, 6, 12, 18];
+[0,1,2,3].forEach(i=>{
+  const p=document.getElementById('paper'+i);
+  if(p){
+    p.style.transform=`rotate(${ROTS[i]}deg) translateY(${YOFFS[i]}px)`;
+  }
+});
+
+function flyPaper(idx, onDone){
+  const p=document.getElementById('paper'+idx);
+  if(!p) return;
+  paperState.flying=true;
+  const rot=ROTS[idx]||0;
+  const dir=Math.random()>.5?1:-1;
+  // Flutter first
+  let fc=0;
+  const fiv=setInterval(()=>{
+    fc++;
+    p.style.transform=`rotate(${rot+(Math.random()-.5)*2.5}deg) translateY(${(Math.random()-.5)*5}px)`;
+    if(fc>8){
+      clearInterval(fiv);
+      p.style.transition='transform 1s cubic-bezier(.4,0,.2,1),opacity .75s ease';
+      p.style.transform=`rotate(${rot+dir*16}deg) translateY(-120vh) translateX(${dir*25}vw)`;
+      p.style.opacity='0';
+      strike(.3);
+      setTimeout(()=>{
+        p.style.display='none';
+        paperState.flying=false;
+        onDone&&onDone();
+      },1000);
+    }
+  },65);
+}
+
+// Observe when paper stack is fully visible → lock scroll
+const stackEl=document.getElementById('paperStack');
+let stackInView=false;
+let entranceGlitchDone=false;
+const stackObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    stackInView=e.isIntersecting;
+    if(stackInView && paperState.current<4 && paperState.phase!=='done'){
+      // Entrance glitch on the top paper before locking
+      if(!entranceGlitchDone){
+        entranceGlitchDone=true;
+        entranceGlitch(()=>{ lockScroll(); });
+      } else {
+        lockScroll();
+      }
+    }
+  });
+},{threshold:0.75}); // 75% visible = papers properly on screen before locking
+stackObs.observe(stackEl);
+
+// Glitch the top paper on entrance to signal it's interactive
+function entranceGlitch(onDone){
+  const p=document.getElementById('paper0');
+  if(!p){ onDone&&onDone(); return; }
+  let gc=0;
+  const iv=setInterval(()=>{
+    gc++;
+    const jx=((Math.random()-.5)*10).toFixed(1);
+    const sy=((.92+Math.random()*.12).toFixed(2));
+    p.style.transform=`rotate(${ROTS[0]}deg) translateY(${YOFFS[0]}px) translate(${jx}px,0) scaleX(${sy})`;
+    p.style.filter=`hue-rotate(${Math.random()*8}deg) brightness(${(.9+Math.random()*.3).toFixed(2)})`;
+    strike(.4);
+    if(gc>10){
+      clearInterval(iv);
+      p.style.transform=`rotate(${ROTS[0]}deg) translateY(${YOFFS[0]}px)`;
+      p.style.filter='none';
+      setTimeout(()=>{ onDone&&onDone(); },200);
+    }
+  },55);
+}
+
+// Wheel handler — accumulates delta, triggers actions
+window.addEventListener('wheel', e=>{
+  if(!paperState.locked) return;
+  if(paperState.flying) return;
+  if(e.deltaY <= 0) return;
+  e.preventDefault();
+  paperState.wheelAcc += e.deltaY;
+  if(paperState.wheelAcc >= WHEEL_THRESH){
+    paperState.wheelAcc = 0;
+    processNextPaperAction();
+  }
+},{passive:false});
+
+// ── TOUCH SCROLL for paper stack (mobile) ────────────────────
+let _touchY = 0;
+let _touchActive = false;
+
+document.addEventListener('touchstart', e=>{
+  if(!paperState.locked) return;
+  _touchY = e.touches[0].clientY;
+  _touchActive = true;
+},{passive:true});
+
+document.addEventListener('touchmove', e=>{
+  if(!paperState.locked || !_touchActive) return;
+  if(paperState.flying) return;
+  const dy = _touchY - e.touches[0].clientY; // positive = swipe up = scroll down
+  if(dy <= 0) return; // only swipe up
+  e.preventDefault(); // block native scroll while locked
+  _touchY = e.touches[0].clientY;
+  paperState.wheelAcc += dy * 1.5; // slightly amplified for mobile
+  if(paperState.wheelAcc >= 80){ // lower threshold for touch
+    paperState.wheelAcc = 0;
+    processNextPaperAction();
+  }
+},{passive:false});
+
+document.addEventListener('touchend', ()=>{
+  _touchActive = false;
+},{passive:true});
+
+function processNextPaperAction(){
+  const idx = PAPERS_ORDER[paperState.current];
+  if(paperState.phase === 'screenplay'){
+    // Glitch screenplay → reveal dossier
+    paperState.phase = 'dossier';
+    revealDossier(idx, ()=>{
+      // ready to fly on next scroll
+    });
+  } else if(paperState.phase === 'dossier'){
+    // Fly the paper away
+    paperState.phase = 'fly';
+    flyPaper(idx, ()=>{
+      paperState.current++;
+      if(paperState.current >= 4){
+        // All papers done — unlock
+        paperState.phase = 'done';
+        paperState.locked = false;
+        unlockScroll();
+        // Scroll to next section smoothly
+        const contactSection = document.getElementById('contact-section');
+        if(contactSection) setTimeout(()=>contactSection.scrollIntoView({behavior:'smooth'}),200);
+      } else {
+        paperState.phase = 'screenplay';
+        // Still locked — next paper waits
+      }
+    });
+  }
+}
+
+// GLITTER on work items
+const GCOLS=['#080004','rgba(0,0,0,.6)','rgba(0,0,0,.8)','rgba(30,0,10,.9)'];
+function spawnG(){
+  for(let i=0;i<12;i++){
+    const p=document.createElement('div');p.className='gpt';
+    const a=Math.random()*Math.PI*2,d=16+Math.random()*44,sz=(2+Math.random()*4)|0;
+    p.style.cssText=`left:${mx}px;top:${my}px;width:${sz}px;height:${sz}px;background:${GCOLS[Math.floor(Math.random()*GCOLS.length)]};--dx:${(Math.cos(a)*d).toFixed(1)}px;--dy:${(Math.sin(a)*d).toFixed(1)}px;`;
+    document.body.appendChild(p);setTimeout(()=>p.remove(),600);
+  }
+}
+document.querySelectorAll('.work-item').forEach(item=>{
+  let giv=null;
+  item.addEventListener('mouseenter',()=>{giv=setInterval(spawnG,90);});
+  item.addEventListener('mouseleave',()=>{clearInterval(giv);});
+});
+
+// RETURN TO NERD
+document.getElementById('returnBtn').addEventListener('click',()=>{
+  const to=document.getElementById('transOverlay');
+  to.style.display='block';to.innerHTML='';
+  let sc=0;
+  const siv=setInterval(()=>{
+    sc++;
+    const line=document.createElement('div');
+    line.style.cssText=`position:absolute;left:0;right:0;top:${Math.random()*100}%;height:${2+Math.random()*5}px;background:rgba(204,0,0,${.6+Math.random()*.4});box-shadow:0 0 8px rgba(204,0,0,.5);`;
+    to.appendChild(line);
+    if(sc>32){
+      clearInterval(siv);
+      to.style.background='#fff';
+      setTimeout(()=>{
+        to.style.background='#000';
+        to.innerHTML='<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="font-family:Anton,sans-serif;font-size:clamp(1rem,3vw,2rem);color:rgba(0,212,255,.88);letter-spacing:.2em;text-align:center;line-height:1.8;">CONTAINMENT RESTORED<br><span style=\'font-size:.55em;color:rgba(0,212,255,.45);letter-spacing:.12em;\'>REDIRECTING TO TECHNICAL WORLD</span></div></div>';
+        setTimeout(()=>{window.location.href='index.html';},900);
+      },110);
+    }
+  },32);
+});
+
+// CONTACT FORM
+const cForm=document.getElementById('cForm');
+const cSubmit=document.getElementById('cSubmit');
+const cSuccess=document.getElementById('cSuccess');
+
+cForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const inputs=cForm.querySelectorAll('[required]');
+
+  // Validation
+  let valid=true;
+  inputs.forEach(inp=>{
+    if(!inp.value.trim()){
+      inp.style.borderColor='rgba(255,77,77,0.7)';
+      valid=false;
+    } else {
+      inp.style.borderColor='';
+    }
+    if(inp.type==='email'&&inp.value.trim()){
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim())){
+        inp.style.borderColor='rgba(255,77,77,0.7)';
+        valid=false;
+      }
+    }
+  });
+  if(!valid) return;
+
+  cSubmit.textContent='TRANSMITTING...';
+  cSubmit.style.opacity='.5';
+  cSubmit.disabled=true;
+
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      access_key:'08330a1d-56fc-40ff-a126-477ee0c6dfb2',
+      name:cForm.querySelector('[name="name"]').value,
+      email:cForm.querySelector('[name="email"]').value,
+      message:cForm.querySelector('[name="message"]').value,
+      subject:'V World — Transmission',
+    })
+  }).then(r=>r.json()).then(data=>{
+    if(data.success){
+      cSubmit.style.display='none';
+      cSuccess.style.display='block';
+      cForm.reset();
+      inputs.forEach(inp=>inp.style.borderColor='');
+    } else {
+      cSubmit.textContent='TRANSMIT';
+      cSubmit.style.opacity='1';
+      cSubmit.disabled=false;
+    }
+  }).catch(()=>{
+    cSubmit.textContent='TRANSMIT';
+    cSubmit.style.opacity='1';
+    cSubmit.disabled=false;
+  });
+});
+
+// THANK YOU SLIDER ── triggers automatically when user scrolls to bottom of page
+const tyPanel=document.getElementById('thankYouPanel');
+const tyClose=document.getElementById('tyClose');
+let tyShown=false;
+
+function showThankYou(){
+  if(tyShown) return;
+  tyShown=true;
+  document.body.classList.add('ty-active');
+  tyPanel.classList.add('visible');
+  function typeIt(el,text,delay,cb){
+    if(!el) return;
+    let i=0;el.textContent='';
+    const iv=setInterval(()=>{el.textContent+=text[i];i++;if(i>=text.length){clearInterval(iv);cb&&cb();}},delay);
+  }
+  setTimeout(()=>{
+    typeIt(document.getElementById('tyL1'),"IF YOU'VE COME TILL THIS…",50,()=>{
+      setTimeout(()=>{
+        typeIt(document.getElementById('tyL2'),"YOU'RE THE ONE.",62,()=>{
+          setTimeout(()=>{
+            typeIt(document.getElementById('tyL3'),'THANKS ON MY BEHALF FOR COMPLETING THIS.',42);
+          },320);
+        });
+      },260);
+    });
+  },600);
+}
+
+tyClose.addEventListener('click',()=>{
+  tyPanel.classList.remove('visible');
+  document.body.classList.remove('ty-active');
+});
+
+// Thank you — fires when user scrolls to within 40px of page bottom
+let tyShownOnScroll = false;
+window.addEventListener('scroll', ()=>{
+  if(tyShownOnScroll || tyShown) return;
+  if(paperState.phase !== 'done' && paperState.current < 4) return; // papers not done yet
+  const distFromBottom = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+  if(distFromBottom < 40){
+    tyShownOnScroll = true;
+    showThankYou();
+  }
+}, {passive:true});
+
+// RETURN TO MS (inside thank you panel)
+document.getElementById('returnToMs').addEventListener('click',()=>{
+  const to=document.getElementById('transOverlay');
+  to.style.display='block';to.innerHTML='';
+  to.style.background='#cc0000';
+  setTimeout(()=>{
+    to.innerHTML='<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="font-family:Anton,sans-serif;font-size:clamp(1rem,3vw,2rem);color:rgba(0,212,255,.88);letter-spacing:.2em;text-align:center;line-height:1.8;">CONTAINMENT RESTORED<br><span style=\'font-size:.55em;color:rgba(0,212,255,.45);letter-spacing:.12em;\'>REDIRECTING TO TECHNICAL WORLD</span></div></div>';
+    to.style.background='#000';
+    setTimeout(()=>{window.location.href='index.html';},900);
+  },600);
+});
+
+if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.dossier-block').forEach((el,i)=>{
+    gsap.fromTo(el,{opacity:0,y:45},{opacity:1,y:0,duration:.85,ease:'power3.out',delay:i*.08,
+     scrollTrigger:{trigger:el,start:'top 86%',toggleActions:'play none none reverse'}});
+  });
+  gsap.fromTo('.about-title',{opacity:0,x:-40},{opacity:1,x:0,duration:.9,ease:'power3.out',
+   scrollTrigger:{trigger:'#about-section',start:'top 80%',toggleActions:'play none none reverse'}});
+  gsap.utils.toArray('.ap-item').forEach((el,i)=>{
+    gsap.fromTo(el,{opacity:0,y:25},{opacity:1,y:0,duration:.6,ease:'power2.out',delay:i*.08,
+     scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none reverse'}});
+  });
+  gsap.fromTo('.writings-title',{opacity:0,x:-40},{opacity:1,x:0,duration:.9,ease:'power3.out',
+   scrollTrigger:{trigger:'#writings-section',start:'top 80%',toggleActions:'play none none reverse'}});
+  // Contact section — uses .about-title class (reused for OPEN CHANNEL heading)
+  gsap.fromTo('#contact-section .about-title',{opacity:0,x:-40},{opacity:1,x:0,duration:.9,ease:'power3.out',
+   scrollTrigger:{trigger:'#contact-section',start:'top 80%',toggleActions:'play none none reverse'}});
+  gsap.utils.toArray('.c-link,.c-field,.c-submit').forEach((el,i)=>{
+    gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.55,ease:'power2.out',delay:i*.06,
+     scrollTrigger:{trigger:'#contact-section',start:'top 75%',toggleActions:'play none none reverse'}});
+  });
+}
+
+</script>
+</body>
+</html>

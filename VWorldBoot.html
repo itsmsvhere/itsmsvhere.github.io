@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>V — Identity B</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{ box-sizing:border-box; margin:0; padding:0; cursor:none!important; }
+@media (hover:none) and (pointer:coarse){*{cursor:auto!important;}#cursor{display:none!important;}}
+html,body{ background:#000; width:100%; height:100%; overflow:hidden; font-family:'IBM Plex Mono',monospace; }
+
+/* ── SPEARHEAD CURSOR ── */
+#cursor{
+  position:fixed;z-index:999999;pointer-events:none;
+  transform:translate(-2px,-50%);
+}
+#cursor.glitter{
+  animation:spearPulse .2s ease-in-out infinite alternate;
+}
+@keyframes spearPulse{
+  0%  { filter:drop-shadow(0 0 6px #cc0000) drop-shadow(0 0 14px #ff4400) drop-shadow(0 0 2px #fff); }
+  100%{ filter:drop-shadow(0 0 16px #ff0000) drop-shadow(0 0 32px #ff6600) drop-shadow(0 0 8px #fff) drop-shadow(0 0 40px #ff2200); }
+}
+
+/* ── GLITTER PARTICLES ── */
+.gpt{
+  position:fixed;z-index:999998;pointer-events:none;border-radius:50%;
+  animation:gfly .55s ease forwards;
+}
+@keyframes gfly{
+  0%  { opacity:1; transform:translate(0,0) scale(1); }
+  100%{ opacity:0; transform:translate(var(--dx),var(--dy)) scale(0); }
+}
+
+/* ── OVERLAYS ── */
+#grain{ position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.05;mix-blend-mode:screen; }
+#scanlines{ position:fixed;inset:0;z-index:8;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(180,0,60,.03) 3px,rgba(180,0,60,.03) 4px); }
+#redGlow{ position:fixed;inset:0;z-index:7;pointer-events:none;
+  background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(120,0,30,.2) 0%,transparent 70%);
+  opacity:0;transition:opacity 1.5s ease; }
+#gCanvas{ position:fixed;inset:0;z-index:4;pointer-events:none; }
+
+/* ── STAGE ── */
+#stage{
+  position:fixed;inset:0;z-index:10;background:#000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+
+/* ── CLAPBOARD ── */
+#clapWrap{
+  position:fixed;inset:0;z-index:20;
+  display:none;align-items:center;justify-content:center;
+  background:#000;
+}
+
+.clap-board{ position:relative;display:flex;flex-direction:column;align-items:stretch; }
+
+/* Flap */
+.clap-flap{
+  background:#0d0d0d;border:2px solid #cc0000;border-bottom:none;
+  border-radius:4px 4px 0 0;
+  height:clamp(48px,9vw,78px);width:clamp(240px,42vw,380px);
+  position:relative;overflow:hidden;
+  transform-origin:bottom left;
+  box-shadow:0 0 20px rgba(204,0,0,.35);
+}
+.clap-flap::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,#1a0000 0,#1a0000 10px,#cc0000 10px,#cc0000 12px);
+  opacity:.5;
+}
+.clap-flap-text{
+  position:absolute;inset:0;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 18px;
+  font-family:'Anton',sans-serif;font-size:clamp(.75rem,1.6vw,1.15rem);
+  color:rgba(255,255,255,.75);letter-spacing:.08em;
+}
+
+/* Body */
+.clap-body{
+  background:#080808;border:2px solid #cc0000;border-top:none;
+  border-radius:0 0 4px 4px;
+  width:clamp(240px,42vw,380px);
+  position:relative;overflow:hidden;
+  box-shadow:0 0 28px rgba(204,0,0,.4),inset 0 0 14px rgba(204,0,0,.06);
+}
+.clap-body::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent 0,transparent 12px,rgba(204,0,0,.1) 12px,rgba(204,0,0,.1) 14px);
+}
+.clap-inner{
+  position:relative;z-index:2;padding:18px 20px;display:flex;flex-direction:column;gap:10px;
+}
+.clap-title{
+  font-family:'Anton',sans-serif;font-size:clamp(1.4rem,3.5vw,2.4rem);
+  color:#cc0000;letter-spacing:.06em;
+  text-shadow:0 0 20px rgba(204,0,0,.7);margin-bottom:4px;
+}
+.clap-row{
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(204,0,0,.15);padding-bottom:7px;
+}
+.cl{ font-size:9px;letter-spacing:.2em;color:rgba(204,0,0,.35);text-transform:uppercase; }
+.cv{ font-size:10px;letter-spacing:.1em;color:rgba(204,0,0,.75);font-weight:500; }
+
+/* ── SPLIT PANELS ── */
+#splitL,#splitR{
+  position:fixed;top:0;height:100%;z-index:50;background:#000;display:none;
+}
+#splitL{ left:0;width:50%;transform-origin:left; }
+#splitR{ right:0;width:50%;transform-origin:right; }
+
+/* ── V WORLD ── */
+#vWorld{
+  position:fixed;inset:0;z-index:5;background:#08000e;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;overflow:hidden;transition:opacity .6s ease;
+}
+.ctag{
+  position:fixed;font-size:9px;letter-spacing:.2em;
+  color:rgba(180,0,60,.25);text-transform:uppercase;
+  z-index:15;opacity:0;transition:opacity .8s ease;
+}
+
+/* ── KEYFRAMES ── */
+@keyframes vGlow{
+  0%,100%{ text-shadow:0 0 80px rgba(204,0,0,.7),0 0 160px rgba(204,0,0,.3); }
+  50%    { text-shadow:0 0 140px rgba(204,0,0,1),0 0 280px rgba(204,0,0,.6); }
+}
+@keyframes flapTap{
+  0%  { transform:rotate(0deg); }
+  35% { transform:rotate(-42deg); }
+  52% { transform:rotate(-42deg); }
+  100%{ transform:rotate(0deg); }
+}
+@keyframes splitLeft { 0%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
+@keyframes splitRight{ 0%{transform:translateX(0)} 100%{transform:translateX(100%)}  }
+
+/* ═══════════════════════════════════════
+   VWORLDBOOT CROSS-PLATFORM RESPONSIVE
+═══════════════════════════════════════ */
+
+* { -webkit-tap-highlight-color: transparent; }
+
+/* ── V LETTER — scale on mobile ── */
+@media (max-width: 600px) {
+  #vLetter { font-size: clamp(5rem, 22vw, 10rem) !important; }
+  #warnText { font-size: clamp(.55rem, 2.8vw, .85rem) !important; }
+}
+
+/* ── CLAPBOARD — scale on mobile ── */
+@media (max-width: 600px) {
+  .clap-flap, .clap-body {
+    width: clamp(220px, 88vw, 380px) !important;
+  }
+  .clap-flap { height: clamp(44px, 11vw, 65px) !important; }
+  .clap-inner { padding: 14px 16px !important; }
+  .clap-title { font-size: clamp(1.1rem, 5vw, 2rem) !important; }
+}
+
+/* ── V WORLD CONTENT — scale ── */
+@media (max-width: 600px) {
+  #bigV { font-size: clamp(5rem, 22vw, 10rem) !important; }
+  #ishaal { font-size: clamp(1.5rem, 6vw, 3rem) !important; }
+  #eyebrow span { font-size: clamp(.45rem, 1.8vw, .7rem) !important; }
+  #tagline span { font-size: clamp(.75rem, 3.5vw, 1.2rem) !important; }
+  #works { gap: 20px !important; }
+}
+
+/* ── CORNER COORDS — hide some on mobile ── */
+@media (max-width: 480px) {
+  #ctTR, #ctBL { display: none; }
+  #ctTL, #ctBR { font-size: 7px !important; letter-spacing: .14em !important; }
+}
+
+/* ── EXPLORE BTN — larger touch target ── */
+@media (max-width: 600px) {
+  #exploreBtn { padding: 14px 32px !important; font-size: 11px !important; }
+}
+
+/* ── CANVAS RESIZE ── */
+
+/* ── SAFE AREA / NOTCH / FULLSCREEN ── */
+:root{
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+}
+html,body{
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+}
+/* Sections that touch the bottom edge */
+body > *:last-child,
+#closing, #closing-wrap, .section-frame:last-of-type {
+  padding-bottom: calc(60px + var(--sab)) !important;
+}
+/* Fixed bottom elements clear the home indicator */
+.clock, .version-footer, #progressRail {
+  bottom: calc(20px + var(--sab)) !important;
+}
+/* Fixed top elements clear the status bar */
+.hdr { padding-top: calc(0px + var(--sat)); }
+/* Thank you panel bottom padding */
+#thankYouPanel {
+  padding-bottom: calc(60px + var(--sab)) !important;
+}
+/* Boot screen bottom status */
+#bootStatus { bottom: calc(28px + var(--sab)) !important; }
+#loadStatus  { bottom: calc(28px + var(--sab)) !important; }
+</style>
+</head>
+<body>
+
+<!-- SPEARHEAD CURSOR -->
+<div id="cursor">
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+    <!-- Head -->
+    <polygon points="28,15 10,6 14,15 10,24" fill="#cc0000" opacity=".95"/>
+    <polygon points="28,15 10,6 14,15 10,24" fill="none" stroke="rgba(255,80,80,.45)" stroke-width=".7"/>
+    <!-- Shaft -->
+    <line x1="14" y1="15" x2="2"  y2="15" stroke="#cc0000" stroke-width="1.5" opacity=".65"/>
+    <!-- Crossguard -->
+    <line x1="8" y1="10.5" x2="8" y2="19.5" stroke="#cc0000" stroke-width="1.1" opacity=".4"/>
+    <!-- Tip glow -->
+    <circle cx="28" cy="15" r="1.3" fill="rgba(255,180,180,.9)"/>
+  </svg>
+</div>
+
+<canvas id="grain"></canvas>
+<div id="scanlines"></div>
+<div id="redGlow"></div>
+<canvas id="gCanvas"></canvas>
+
+<!-- STAGE -->
+<div id="stage">
+  <div id="vLetter" style="
+    font-family:'Anton',sans-serif;font-size:clamp(8rem,22vw,18rem);
+    color:#cc0000;line-height:1;opacity:0;transform:scale(.6);
+    transition:opacity .8s ease,transform .8s cubic-bezier(.34,1.56,.64,1);
+    text-shadow:0 0 80px rgba(204,0,0,.7);letter-spacing:-.02em;
+    position:relative;z-index:2;user-select:none;
+  ">V</div>
+  <div id="warnText" style="
+    font-size:clamp(.6rem,1.2vw,.85rem);letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(204,0,0,.55);text-align:center;
+    opacity:0;transition:opacity 1s ease .6s;
+    position:relative;z-index:2;margin-top:16px;
+  ">⚠  Warning : Remote Wipe Occurred — V entered the Chat</div>
+</div>
+
+<!-- CLAPBOARD -->
+<div id="clapWrap">
+  <div class="clap-board">
+    <div class="clap-flap" id="clapFlap">
+      <div class="clap-flap-text"><span>SCENE V</span><span>TAKE 01</span></div>
+    </div>
+    <div class="clap-body">
+      <div class="clap-inner">
+        <div class="clap-title">V</div>
+        <div class="clap-row"><span class="cl">IDENTITY</span><span class="cv">B — CREATIVE</span></div>
+        <div class="clap-row"><span class="cl">DIRECTOR</span><span class="cv">VISHAAL M S</span></div>
+        <div class="clap-row"><span class="cl">SCENE</span><span class="cv">ALTER EGO // REVEAL</span></div>
+        <div class="clap-row"><span class="cl">LOCATION</span><span class="cv">10.79°N / 78.70°E</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPLITS -->
+<div id="splitL"></div>
+<div id="splitR"></div>
+
+<!-- V WORLD -->
+<div id="vWorld">
+  <canvas id="vGrain" style="position:absolute;inset:0;width:100%;height:100%;opacity:.05;pointer-events:none;mix-blend-mode:screen;z-index:0;"></canvas>
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(180,0,60,.03) 3px,rgba(180,0,60,.03) 4px);"></div>
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(120,0,30,.2) 0%,transparent 70%);"></div>
+  <div class="ctag" id="ctTL" style="top:22px;left:28px;">10.7905°N / 78.7047°E</div>
+  <div class="ctag" id="ctTR" style="top:22px;right:28px;text-align:right;">SHOLINGHUR · TAMIL NADU<br>IDENTITY_B // ACTIVE</div>
+  <div class="ctag" id="ctBR" style="bottom:22px;right:28px;">V.2.0 // CREATIVE_DAEMON</div>
+  <div class="ctag" id="ctBL" style="bottom:22px;left:28px;">// CREATIVE_DAEMON_ACTIVE</div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;">
+    <div id="eyebrow"   style="display:flex;align-items:center;gap:.1em;margin-bottom:18px;"></div>
+    <div style="display:flex;align-items:baseline;gap:.04em;line-height:.9;margin-bottom:10px;">
+      <div id="bigV" style="font-family:'Anton',sans-serif;font-size:clamp(8rem,22vw,18rem);color:#cc0000;line-height:.9;letter-spacing:-.02em;opacity:0;transform:translateY(80px) scale(.9);transition:opacity .7s cubic-bezier(.34,1.56,.64,1),transform .7s cubic-bezier(.34,1.56,.64,1);text-shadow:0 0 60px rgba(204,0,0,.45);">V</div>
+      <div id="ishaal" style="font-family:'Anton',sans-serif;font-size:clamp(2rem,5vw,4rem);color:rgba(204,0,0,.18);letter-spacing:.08em;align-self:flex-end;padding-bottom:.18em;opacity:0;transform:translateX(-20px);transition:opacity .6s ease .5s,transform .6s ease .5s;">ISHAAL</div>
+    </div>
+    <div id="tagline" style="display:flex;flex-wrap:wrap;justify-content:center;gap:.3em;margin-bottom:40px;max-width:700px;"></div>
+    <div id="works"   style="display:flex;gap:36px;flex-wrap:wrap;justify-content:center;margin-bottom:48px;"></div>
+    <div id="exploreBtn" style="font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:rgba(180,0,60,.45);border:1px solid rgba(180,0,60,.2);padding:10px 28px;border-radius:2px;opacity:0;transition:opacity .6s ease,color .2s,border-color .2s,background .2s;pointer-events:auto;cursor:pointer!important;user-select:none;">&gt;_EXPLORE_V</div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ── CURSOR ────────────────────────────────────────────────────
+const cursorEl = document.getElementById('cursor');
+if(window.matchMedia('(hover: none) and (pointer: coarse)').matches){
+  if(cursorEl) cursorEl.style.display='none';
+  document.body.style.cursor='auto';
+}
+document.addEventListener('touchstart',()=>{
+  if(cursorEl) cursorEl.style.display='none';
+  document.body.style.cursor='auto';
+},{once:true,passive:true});
+let mx = window.innerWidth/2, my = window.innerHeight/2;
+window.addEventListener('pointermove', e => { mx=e.clientX; my=e.clientY; });
+(function tick(){ if(cursorEl&&cursorEl.style.display!=='none'){cursorEl.style.left=mx+'px'; cursorEl.style.top=my+'px';} requestAnimationFrame(tick); })();
+
+// ── FILM GRAIN ────────────────────────────────────────────────
+function startGrain(id){
+  const c=document.getElementById(id); if(!c)return;
+  c.width=280; c.height=280;
+  const ctx=c.getContext('2d');
+  (function draw(){
+    const img=ctx.createImageData(280,280);
+    for(let i=0;i<img.data.length;i+=4){
+      const v=Math.random()*255|0;
+      img.data[i]=v; img.data[i+1]=0; img.data[i+2]=(v*.15)|0; img.data[i+3]=255;
+    }
+    ctx.putImageData(img,0,0); requestAnimationFrame(draw);
+  })();
+}
+startGrain('grain'); startGrain('vGrain');
+
+// ── GLITCH CANVAS ─────────────────────────────────────────────
+const gc = document.getElementById('gCanvas');
+gc.width=window.innerWidth; gc.height=window.innerHeight;
+const gx = gc.getContext('2d');
+
+function strike(intensity){
+  gx.clearRect(0,0,gc.width,gc.height);
+  const n=(3+intensity*12)|0;
+  for(let i=0;i<n;i++){
+    const y=Math.random()*gc.height;
+    const h=(Math.random()*6+1)|0;
+    const r=(160+Math.random()*95)|0;
+    const g2=(Math.random()*50)|0;
+    gx.fillStyle=`rgba(${r},${g2},0,${.4+intensity*.45})`;
+    gx.fillRect(0,y,gc.width,h);
+  }
+  gc.style.filter=`drop-shadow(${(intensity*10)|0}px 0 0 rgba(255,0,0,.35))`;
+  setTimeout(()=>{ gx.clearRect(0,0,gc.width,gc.height); gc.style.filter='none'; },65);
+}
+
+// ── GLITTER ───────────────────────────────────────────────────
+const exploreBtn = document.getElementById('exploreBtn');
+const GCOLS = ['#cc0000','#ff2200','#ff6600','#fff','#ff0044','#ff8800'];
+let glitIv = null;
+
+function spawnGlitter(){
+  const rect = exploreBtn.getBoundingClientRect();
+  const bx = rect.left + rect.width/2;
+  const by = rect.top  + rect.height/2;
+
+  // Burst from cursor position + button center
+  [{ x:mx, y:my }, { x:bx, y:by }].forEach(origin=>{
+    for(let i=0;i<10;i++){
+      const p=document.createElement('div'); p.className='gpt';
+      const a=Math.random()*Math.PI*2;
+      const d=18+Math.random()*52;
+      const sz=(2+Math.random()*5)|0;
+      p.style.cssText=`
+        left:${origin.x}px;top:${origin.y}px;
+        width:${sz}px;height:${sz}px;
+        background:${GCOLS[Math.floor(Math.random()*GCOLS.length)]};
+        --dx:${(Math.cos(a)*d).toFixed(1)}px;
+        --dy:${(Math.sin(a)*d).toFixed(1)}px;
+        box-shadow:0 0 ${sz*2}px ${GCOLS[0]},0 0 ${sz}px #fff;
+      `;
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(), 600);
+    }
+  });
+}
+
+exploreBtn.addEventListener('mouseenter',()=>{
+  cursorEl.classList.add('glitter');
+  exploreBtn.style.color='rgba(204,0,0,.9)';
+  exploreBtn.style.borderColor='rgba(204,0,0,.6)';
+  exploreBtn.style.background='rgba(204,0,0,.06)';
+  glitIv = setInterval(spawnGlitter, 75);
+});
+exploreBtn.addEventListener('mouseleave',()=>{
+  cursorEl.classList.remove('glitter');
+  exploreBtn.style.color='rgba(180,0,60,.45)';
+  exploreBtn.style.borderColor='rgba(180,0,60,.2)';
+  exploreBtn.style.background='none';
+  clearInterval(glitIv);
+});
+// Touch: tap = click on mobile
+exploreBtn.addEventListener('touchstart',()=>{
+  exploreBtn.style.color='rgba(204,0,0,.9)';
+  exploreBtn.style.borderColor='rgba(204,0,0,.6)';
+  exploreBtn.style.background='rgba(204,0,0,.06)';
+},{passive:true});
+exploreBtn.addEventListener('click',()=>{
+  // Red scanlines tear + shatter → VWorld.html
+  let t=0;
+  const iv=setInterval(()=>{
+    t++;
+    const el=document.createElement('div');
+    el.style.cssText=`position:fixed;left:0;right:0;height:${(Math.random()*8+2)|0}px;top:${Math.random()*100}%;background:rgba(204,0,0,${.5+Math.random()*.4});z-index:9999;pointer-events:none;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),100);
+    if(t>20){
+      clearInterval(iv);
+      // Shatter to black then navigate
+      document.body.style.transition='opacity .3s ease';
+      document.body.style.opacity='0';
+      setTimeout(()=>{ window.location.href='VWorld.html'; },350);
+    }
+  },40);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SEQUENCE
+// ═══════════════════════════════════════════════════════════════
+const vLetter  = document.getElementById('vLetter');
+const warnText = document.getElementById('warnText');
+
+// PHASE 1 — V appears
+setTimeout(()=>{
+  vLetter.style.opacity='1'; vLetter.style.transform='scale(1)';
+  vLetter.style.animation='vGlow 2.5s ease-in-out infinite .8s';
+  warnText.style.opacity='1';
+},300);
+
+// Occasional V glitch
+const vGIv=setInterval(()=>{
+  if(Math.random()<.28){
+    vLetter.style.transform=`scale(1) translate(${(Math.random()-.5)*5}px,0)`;
+    vLetter.style.filter=`hue-rotate(${Math.random()*15}deg)`;
+    setTimeout(()=>{ vLetter.style.transform='scale(1)'; vLetter.style.filter='none'; },70);
+  }
+},1300);
+
+// PHASE 2 — warning fades, V glitches into clapboard
+setTimeout(()=>{
+  clearInterval(vGIv);
+  warnText.style.transition='opacity .5s ease'; warnText.style.opacity='0';
+  setTimeout(()=>{ glitchVToClap(); },600);
+},3600);
+
+function glitchVToClap(){
+  let gc2=0;
+  const iv=setInterval(()=>{
+    gc2++; strike(.8);
+    const shifts=['translate('+(((Math.random()-.5)*18)|0)+'px,0) scaleX('+((.85+Math.random()*.3).toFixed(2))+')',
+                  'translate('+(((Math.random()-.5)*12)|0)+'px,'+(((Math.random()-.5)*8)|0)+'px)',
+                  'scaleX('+((.7+Math.random()*.6).toFixed(2))+')'];
+    vLetter.style.transform=shifts[gc2%3];
+    vLetter.style.filter=`hue-rotate(${Math.random()*30}deg) brightness(${(1.5+Math.random()).toFixed(1)})`;
+    vLetter.style.opacity=(.3+Math.random()*.7).toFixed(2);
+    if(gc2>14){
+      clearInterval(iv);
+      vLetter.style.transition='opacity .15s ease'; vLetter.style.opacity='0';
+      setTimeout(()=>{ document.getElementById('stage').style.display='none'; showClap(); },160);
+    }
+  },55);
+}
+
+// PHASE 3 — Clapboard appears + taps
+function showClap(){
+  const cw=document.getElementById('clapWrap');
+  const cf=document.getElementById('clapFlap');
+  cw.style.display='flex'; cw.style.opacity='0'; cw.style.transition='opacity .3s ease';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ cw.style.opacity='1'; }));
+
+  // Board glitches while showing
+  let bg=0;
+  const bgIv=setInterval(()=>{ bg++; if(Math.random()<.35) strike(.3); if(bg>14) clearInterval(bgIv); },280);
+
+  // TAP after 1.4s
+  setTimeout(()=>{
+    clearInterval(bgIv);
+    cf.style.animation='flapTap .48s cubic-bezier(.4,0,.2,1) forwards';
+    // Sparks at tap contact moment (40% of .48s ≈ 192ms)
+    setTimeout(()=>{ spawnSparks(); for(let i=0;i<4;i++) setTimeout(()=>strike(.95),i*28); },192);
+    cf.addEventListener('animationend',()=>{
+      setTimeout(()=>{ cw.style.transition='opacity .25s ease'; cw.style.opacity='0'; setTimeout(splitOpen,260); },380);
+    },{once:true});
+  },1400);
+}
+
+function spawnSparks(){
+  const cw=document.getElementById('clapWrap');
+  const rect=cw.getBoundingClientRect();
+  const cx=rect.left+rect.width/2;
+  const cy=rect.top+rect.height*.35;
+  let sp=0;
+  const iv=setInterval(()=>{
+    sp++;
+    gx.clearRect(0,0,gc.width,gc.height);
+    const prog=sp/14, n=22;
+    for(let i=0;i<n;i++){
+      const a=(i/n)*Math.PI*2+Math.random()*.3;
+      const d=prog*(70+Math.random()*60);
+      gx.beginPath(); gx.moveTo(cx,cy); gx.lineTo(cx+Math.cos(a)*d,cy+Math.sin(a)*d);
+      gx.strokeStyle=`rgba(${200+Math.random()*55|0},${Math.random()*40|0},0,${Math.max(0,1-prog*1.5)})`;
+      gx.lineWidth=Math.random()*2.5+.5; gx.stroke();
+    }
+    const fa=Math.max(0,1-prog*2.8);
+    if(fa>0){
+      const g2=gx.createRadialGradient(cx,cy,0,cx,cy,45);
+      g2.addColorStop(0,`rgba(255,255,255,${fa})`);
+      g2.addColorStop(.5,`rgba(204,0,0,${fa*.5})`);
+      g2.addColorStop(1,'rgba(0,0,0,0)');
+      gx.fillStyle=g2; gx.beginPath(); gx.arc(cx,cy,55,0,Math.PI*2); gx.fill();
+    }
+    if(sp>14){ clearInterval(iv); gx.clearRect(0,0,gc.width,gc.height); }
+  },32);
+}
+
+// PHASE 4 — Split open → V World
+function splitOpen(){
+  let cg=0;
+  const chaosIv=setInterval(()=>{ cg++; strike(1.0); if(cg>16){ clearInterval(chaosIv); afterChaos(); } },45);
+}
+
+function afterChaos(){
+  // Red flash
+  gx.fillStyle='rgba(204,0,0,.88)'; gx.fillRect(0,0,gc.width,gc.height);
+  setTimeout(()=>{ gx.clearRect(0,0,gc.width,gc.height); },90);
+
+  setTimeout(()=>{
+    const sL=document.getElementById('splitL'); const sR=document.getElementById('splitR');
+    sL.style.display='block'; sR.style.display='block';
+    sL.style.animation='splitLeft .65s cubic-bezier(.86,0,.07,1) forwards';
+    sR.style.animation='splitRight .65s cubic-bezier(.86,0,.07,1) forwards';
+    document.getElementById('vWorld').style.opacity='1';
+    document.getElementById('redGlow').style.opacity='1';
+    setTimeout(()=>{
+      gc.style.display='none';
+      sL.style.display='none';
+      sR.style.display='none';
+      document.getElementById('clapWrap').style.display='none';
+      buildVWorld();
+    },700);
+  },120);
+}
+
+// ── V WORLD CONTENT ───────────────────────────────────────────
+function buildVWorld(){
+  // Eyebrow
+  const eb=document.getElementById('eyebrow');
+  '>_IDENTITY_B_LOADED'.split('').forEach((ch,i)=>{
+    const s=document.createElement('span');
+    const b=i%3===0;
+    s.style.cssText=`font-size:clamp(.5rem,1vw,.75rem);letter-spacing:.18em;color:rgba(180,0,60,${b?.55:.22});font-weight:${b?700:400};text-transform:uppercase;opacity:0;transform:translateY(-10px);transition:opacity .22s ease ${.04+i*.02}s,transform .22s ease ${.04+i*.02}s;`;
+    s.textContent=ch; eb.appendChild(s);
+  });
+
+  // Tagline
+  const tl=document.getElementById('tagline');
+  [{w:'SCREEN',b:0},{w:'WRI',b:1},{w:'TER',b:0},{w:'·',b:0},{w:'NO',b:0},{w:'VE',b:1},{w:'LIST',b:0},{w:'·',b:0},{w:'STO',b:0},{w:'RY',b:1},{w:'TELLER',b:0}]
+  .forEach((item,i)=>{
+    const s=document.createElement('span');
+    s.style.cssText=`font-family:'Anton',sans-serif;font-size:clamp(.85rem,2vw,1.4rem);color:rgba(180,0,60,${item.b?.72:.22});letter-spacing:${item.b?'.04em':'.12em'};text-transform:uppercase;opacity:0;transform:translateY(14px);transition:opacity .4s ease ${.6+i*.04}s,transform .4s ease ${.6+i*.04}s;`;
+    s.textContent=item.w; tl.appendChild(s);
+  });
+
+  // Works
+  const wk=document.getElementById('works');
+  [{title:'ADHEERA',genre:'HISTORICAL EPIC',lang:'தமிழ்'},{title:'LEONE',genre:'PSYCHOLOGICAL NOIR',lang:'ENG'},{title:'D.A.',genre:'DARK ACTION THRILLER',lang:'ENG'},{title:'YOURS TRULY',genre:'CINEMATIC DRAMA',lang:'ENG'}]
+  .forEach((w,i)=>{
+    const card=document.createElement('div');
+    card.style.cssText=`display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;transform:translateY(20px);transition:opacity .45s ease ${1+i*.1}s,transform .45s ease ${1+i*.1}s;`;
+    const t=document.createElement('div');
+    t.style.cssText='font-family:"Anton",sans-serif;font-size:clamp(.9rem,1.8vw,1.2rem);color:rgba(204,0,0,.8);letter-spacing:.06em;transition:all .2s;';
+    t.textContent=w.title;
+    const g=document.createElement('div');
+    g.style.cssText='font-size:8px;letter-spacing:.18em;color:rgba(180,0,60,.3);text-transform:uppercase;';
+    g.textContent=w.genre;
+    const l=document.createElement('div');
+    l.style.cssText='font-size:8px;letter-spacing:.12em;color:rgba(180,0,60,.18);';
+    l.textContent=w.lang;
+    card.appendChild(t); card.appendChild(g); card.appendChild(l);
+    card.addEventListener('mouseenter',()=>{ t.style.color='#cc0000'; t.style.textShadow='0 0 18px rgba(204,0,0,.7)'; });
+    card.addEventListener('mouseleave',()=>{ t.style.color='rgba(204,0,0,.8)'; t.style.textShadow='none'; });
+    wk.appendChild(card);
+  });
+
+  // Animate everything in
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    setTimeout(()=>{ eb.querySelectorAll('span').forEach(s=>{ s.style.opacity='1'; s.style.transform='translateY(0)'; }); },80);
+    setTimeout(()=>{ const bv=document.getElementById('bigV'); bv.style.opacity='1'; bv.style.transform='translateY(0) scale(1)'; },300);
+    setTimeout(()=>{ const ish=document.getElementById('ishaal'); ish.style.opacity='1'; ish.style.transform='translateX(0)'; },700);
+    setTimeout(()=>{ tl.querySelectorAll('span').forEach(s=>{ s.style.opacity='1'; s.style.transform='translateY(0)'; }); },780);
+    setTimeout(()=>{ wk.querySelectorAll('div').forEach(c=>{ c.style.opacity='1'; c.style.transform='translateY(0)'; }); },1050);
+    setTimeout(()=>{
+      document.getElementById('exploreBtn').style.opacity='1';
+      ['ctTL','ctTR','ctBR','ctBL'].forEach(id=>{ document.getElementById(id).style.opacity='1'; });
+    },1400);
+
+    // V glitch pulse
+    const bv=document.getElementById('bigV');
+    setInterval(()=>{
+      if(Math.random()<.22){
+        bv.style.textShadow=`${((Math.random()-.5)*5).toFixed(1)}px 0 0 rgba(255,0,0,.9)`;
+        bv.style.transform=`translate(${((Math.random()-.5)*3).toFixed(1)}px,0)`;
+        setTimeout(()=>{ bv.style.textShadow='0 0 60px rgba(204,0,0,.45)'; bv.style.transform='none'; },65);
+      }
+    },1800);
+  }));
+}
+</script>
+</body>
+</html>
