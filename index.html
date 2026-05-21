@@ -1403,32 +1403,40 @@ body > *:last-child,
 
     <!-- NEW SLIDER DESIGN -->
     <div class="ae-slider-wrap" id="aeSliderWrap" style="position:relative;z-index:1;">
-
-      <!-- Head row -->
       <div class="ae-slider-head">
         <span class="ae-slider-label">Identity Threshold</span>
         <span class="ae-slider-bigval" id="aeVal">00%</span>
         <span class="ae-slider-state" id="aeInt">// IDENTITY_A · ENGINEER</span>
       </div>
-
-      <!-- Track -->
       <div class="ae-track-new" id="aeHandle">
         <div class="ae-rail"></div>
         <div class="ae-fill-new" id="aeFill" style="width:0%;"></div>
         <div class="ae-ticks" id="aeTicks"></div>
-        <div class="ae-knob" id="aeKnob" style="left:0%;">
-          <div class="ae-knob-grip"></div>
-        </div>
+        <div class="ae-knob" id="aeKnob" style="left:0%;"><div class="ae-knob-grip"></div></div>
       </div>
-
-      <!-- Footer -->
       <div class="ae-slider-footer">
         <span>0% · ENGINEER MODE</span>
         <span class="ae-threshold" id="aeHint">↓ DRAG TO REVEAL ↓</span>
         <span>100% · STORYTELLER</span>
       </div>
-
     </div>
+
+    <!-- TWO MINDS — hidden, slams in at 100% before chaos -->
+    <div id="twoMinds" style="
+      position:absolute;inset:0;z-index:10;
+      display:none;align-items:center;justify-content:center;
+      background:#000;
+      opacity:0;transition:opacity .25s ease;
+    ">
+      <div style="text-align:center;">
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(2.5rem,8vw,7rem);line-height:.95;letter-spacing:-.02em;">
+          <span style="color:#fff;">TWO MINDS.</span><br>
+          <span style="color:#ff2244;font-style:italic;">ONE OPERATOR.</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.3em;color:rgba(255,255,255,0.25);margin-top:24px;text-transform:uppercase;">▲ END OF TRANSMISSION · BEGIN LOOP</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2796,39 +2804,49 @@ function runGlitchTransition(onDone){
 
 // ── LAUNCH V WORLD ────────────────────────────────────────────
 function launchVWorld(){
-  // Phase 1: chaos glitch storm
-  let chaosCount = 0;
-  const glitchLayer = document.getElementById('glitchLayer');
-  const chaosIv = setInterval(()=>{
-    chaosCount++;
-    document.body.style.background = `rgb(${Math.floor(160+Math.random()*95)},0,0)`;
-    document.body.style.filter = `saturate(${2+Math.random()*3}) contrast(${1.5+Math.random()}) hue-rotate(${Math.random()*30}deg)`;
-    document.body.style.transform = `translate(${(Math.random()-.5)*12}px,${(Math.random()-.5)*8}px)`;
-    if(glitchLayer){
-      for(let i=0;i<6;i++){
-        const el=document.createElement('div');
-        el.style.cssText=`position:fixed;top:${Math.random()*100}%;left:0;width:100%;height:${Math.random()*8+1}px;background:rgba(255,${Math.floor(Math.random()*80)},0,0.7);z-index:9999;pointer-events:none;`;
-        glitchLayer.appendChild(el);
-        setTimeout(()=>el.remove(),60);
+  // Show TWO MINDS card first
+  const tm = document.getElementById('twoMinds');
+  if(tm){
+    tm.style.display='flex';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      tm.style.opacity='1';
+    }));
+  }
+  // After 1.2s — chaos fires
+  setTimeout(()=>{
+    let chaosCount=0;
+    const glitchLayer=document.getElementById('glitchLayer');
+    const chaosIv=setInterval(()=>{
+      chaosCount++;
+      document.body.style.background=`rgb(${Math.floor(160+Math.random()*95)},0,0)`;
+      document.body.style.filter=`saturate(${2+Math.random()*3}) contrast(${1.5+Math.random()}) hue-rotate(${Math.random()*30}deg)`;
+      document.body.style.transform=`translate(${(Math.random()-.5)*12}px,${(Math.random()-.5)*8}px)`;
+      if(glitchLayer){
+        for(let i=0;i<6;i++){
+          const el=document.createElement('div');
+          el.style.cssText=`position:fixed;top:${Math.random()*100}%;left:0;width:100%;height:${Math.random()*8+1}px;background:rgba(255,${Math.floor(Math.random()*80)},0,0.7);z-index:9999;pointer-events:none;`;
+          glitchLayer.appendChild(el);
+          setTimeout(()=>el.remove(),60);
+        }
       }
-    }
-    if(chaosCount > 18){
-      clearInterval(chaosIv);
-      document.body.style.transition='background .12s,filter .12s,transform .08s';
-      document.body.style.background='#ffffff';
-      document.body.style.filter='brightness(10)';
-      document.body.style.transform='none';
-      setTimeout(()=>{
-        document.body.style.background='#000';
-        document.body.style.filter='none';
+      if(chaosCount>18){
+        clearInterval(chaosIv);
+        document.body.style.transition='background .12s,filter .12s,transform .08s';
+        document.body.style.background='#ffffff';
+        document.body.style.filter='brightness(10)';
+        document.body.style.transform='none';
         setTimeout(()=>{
-          document.body.style.transition='opacity .35s ease';
-          document.body.style.opacity='0';
-          setTimeout(()=>{ window.location.href='VWorldBoot.html'; },380);
-        },140);
-      },110);
-    }
-  },55);
+          document.body.style.background='#000';
+          document.body.style.filter='none';
+          setTimeout(()=>{
+            document.body.style.transition='opacity .35s ease';
+            document.body.style.opacity='0';
+            setTimeout(()=>{ window.location.href='VWorldBoot.html'; },380);
+          },140);
+        },110);
+      }
+    },55);
+  },1200);
 }
 
 // ── SKILLS STAGE — position nodes on desktop ────────────────
