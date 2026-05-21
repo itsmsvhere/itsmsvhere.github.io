@@ -115,7 +115,186 @@ section{position:relative;width:100%;min-height:100vh;}
 .proj-card.e:hover .proj-top-line{width:100%;background:var(--green);}
 
 /* SKILL NODE */
-.skill-node{background:rgba(12,18,32,0.5);border:1px solid rgba(0,212,255,0.2);border-radius:8px;
+/* ── NEW SLIDER ── */
+.ae-slider-wrap{
+  max-width:800px;
+  padding:32px 36px;
+  border:1px solid rgba(0,212,255,0.2);
+  background:rgba(7,9,28,0.6);
+  backdrop-filter:blur(6px);
+  transition:background .6s,border-color .6s;
+}
+.ae-slider-head{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  margin-bottom:28px;
+}
+.ae-slider-label{
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+}
+.ae-slider-bigval{
+  font-family:'Anton',sans-serif;font-size:clamp(2rem,5vw,3rem);
+  letter-spacing:.04em;color:var(--cyan);
+  transition:color .4s;
+}
+.ae-slider-state{
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cyan);transition:color .4s;
+}
+.ae-track-new{
+  position:relative;height:64px;
+  cursor:ew-resize;user-select:none;
+  touch-action:none;
+}
+.ae-rail{
+  position:absolute;top:50%;left:0;right:0;
+  height:2px;background:rgba(0,212,255,0.15);
+  transform:translateY(-50%);
+}
+.ae-fill-new{
+  position:absolute;top:50%;left:0;
+  height:2px;background:var(--cyan);
+  transform:translateY(-50%);
+  transition:background .4s;
+  box-shadow:0 0 12px var(--cyan);
+}
+.ae-ticks{
+  position:absolute;top:0;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-between;
+  pointer-events:none;
+}
+.ae-ticks span{
+  width:1px;background:rgba(0,212,255,0.15);
+  height:12px;align-self:center;
+}
+.ae-ticks span.major{height:22px;background:rgba(0,212,255,0.3);}
+.ae-knob{
+  position:absolute;top:50%;
+  width:28px;height:64px;
+  background:var(--ink,#050816);
+  transform:translate(-50%,-50%);
+  border:1px solid var(--cyan);
+  box-shadow:0 0 18px rgba(0,212,255,0.4);
+  transition:border-color .4s,box-shadow .4s,background .4s;
+  display:grid;place-items:center;
+}
+.ae-knob-grip{
+  width:8px;height:24px;
+  background:repeating-linear-gradient(0deg,rgba(0,212,255,0.4) 0 2px,transparent 2px 4px);
+  transition:background .4s;
+}
+.ae-slider-footer{
+  margin-top:20px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);
+}
+.ae-threshold{color:var(--cyan);transition:color .4s;}
+
+/* Alter state */
+.ae-altered .ae-slider-wrap{background:rgba(40,8,12,0.6);border-color:rgba(255,60,0,0.3);}
+.ae-altered .ae-slider-bigval{color:#ff4d6d;}
+.ae-altered .ae-slider-state{color:#ff4d6d;}
+.ae-altered .ae-fill-new{background:#ff4d6d;box-shadow:0 0 12px #ff4d6d;}
+.ae-altered .ae-knob{border-color:#ff4d6d;box-shadow:0 0 18px rgba(255,60,0,0.5);background:#1a0407;}
+.ae-altered .ae-knob-grip{background:repeating-linear-gradient(0deg,rgba(255,60,0,0.6) 0 2px,transparent 2px 4px);}
+.ae-altered .ae-threshold{color:#ff4d6d;}
+
+/* Mobile */
+@media(max-width:600px){
+  .ae-slider-wrap{padding:20px 16px;}
+  .ae-track-new{height:52px;cursor:pointer;}
+  .ae-knob{width:22px;height:52px;}
+  .ae-slider-head{flex-direction:column;align-items:flex-start;}
+}
+
+/* ── OLD SLIDER (hide) ── */
+.ae-track,.ae-handle{display:none !important;}
+.skills-stage{
+  position:relative;
+  min-height:560px;
+  margin-top:60px;
+  border:1px solid rgba(0,212,255,0.12);
+  background:
+    linear-gradient(rgba(0,212,255,0.02),rgba(0,212,255,0.0)),
+    radial-gradient(circle at 50% 50%,rgba(0,212,255,0.04),transparent 60%);
+  overflow:hidden;
+}
+.skills-stage::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(to right,rgba(0,212,255,0.06) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(0,212,255,0.06) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+.skill-node{
+  display:flex;flex-direction:column;
+  align-items:flex-start;gap:8px;
+  padding:14px 16px;
+  border:1px solid rgba(0,212,255,0.2);
+  background:rgba(7,9,28,0.88);
+  min-width:160px;
+  transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .25s,box-shadow .25s;
+  cursor:default;
+  position:absolute;
+}
+.skill-node.sn-cy:hover{
+  border-color:var(--cyan);
+  box-shadow:0 0 0 1px var(--cyan),0 0 24px rgba(0,212,255,0.18);
+  transform:translateY(-4px);z-index:5;
+}
+.skill-node.sn-gn:hover{
+  border-color:var(--green);
+  box-shadow:0 0 0 1px var(--green),0 0 24px rgba(0,255,136,0.18);
+  transform:translateY(-4px);z-index:5;
+}
+.sn-icon{
+  width:36px;height:36px;
+  border:1px solid rgba(0,212,255,0.2);
+  display:grid;place-items:center;
+  font-family:'Anton',sans-serif;font-size:15px;
+  color:var(--cyan);letter-spacing:0;
+  flex-shrink:0;
+}
+.skill-node.sn-gn .sn-icon{color:var(--green);border-color:rgba(0,255,136,0.2);}
+.sn-lab{
+  font-family:'Anton',sans-serif;font-size:16px;
+  letter-spacing:.06em;color:#e8eaf6;
+  text-transform:uppercase;line-height:1.1;
+}
+.sn-meta{
+  font-size:9px;letter-spacing:.2em;
+  color:rgba(255,255,255,0.25);text-transform:uppercase;
+}
+
+/* ── MOBILE: switch to grid ── */
+@media(max-width:768px){
+  .skills-stage{
+    min-height:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:rgba(0,212,255,0.08);
+    border:1px solid rgba(0,212,255,0.12);
+  }
+  .skills-stage::before{display:none;}
+  .skill-node{
+    position:relative !important;
+    top:auto !important;left:auto !important;
+    min-width:0;width:100%;
+    background:rgba(7,9,28,0.95);
+  }
+}
+@media(max-width:480px){
+  .skills-stage{grid-template-columns:1fr;}
+}
+@media(min-width:2000px){
+  .skills-stage{min-height:700px;}
+  .skill-node{padding:18px 22px;}
+  .sn-lab{font-size:20px;}
+}
   padding:18px 22px;display:flex;flex-direction:column;align-items:center;gap:5px;
   min-width:110px;transition:all .3s;cursor:none;}
 .skill-node:hover{border-color:var(--cyan);background:rgba(0,212,255,0.05);transform:translateY(-4px);}
@@ -760,21 +939,78 @@ body > *:last-child,
 
 <!-- ── SKILLS ── -->
 <section id="skills">
-  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px;text-align:center;">
+  <div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 40px;">
+
+    <!-- Header -->
     <p class="label reveal" style="margin-bottom:12px;">INTERNAL ARCHITECTURE</p>
-    <div class="f-display reveal reveal-delay-1" style="font-size:clamp(2.5rem,5vw,4rem);margin-bottom:8px;">SYSTEM MAP</div>
-    <p class="label reveal reveal-delay-2" style="margin-bottom:48px;">ACTIVE MODULES — 10 LOADED</p>
-    <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;max-width:820px;">
-      <div class="skill-node reveal reveal-delay-1"><div class="f-display" style="font-size:14px;color:var(--cyan);">Python</div><div class="label" style="margin-top:4px;">Language</div></div>
-      <div class="skill-node reveal reveal-delay-2"><div class="f-display" style="font-size:14px;color:var(--cyan);">React</div><div class="label" style="margin-top:4px;">Framework</div></div>
-      <div class="skill-node reveal reveal-delay-3"><div class="f-display" style="font-size:14px;color:var(--cyan);">C / C++</div><div class="label" style="margin-top:4px;">Language</div></div>
-      <div class="skill-node reveal reveal-delay-4"><div class="f-display" style="font-size:14px;color:var(--cyan);">Java</div><div class="label" style="margin-top:4px;">Language</div></div>
-      <div class="skill-node reveal reveal-delay-5"><div class="f-display" style="font-size:14px;color:var(--cyan);">AI / ML</div><div class="label" style="margin-top:4px;">Specialization</div></div>
-      <div class="skill-node reveal reveal-delay-1"><div class="f-display" style="font-size:14px;color:var(--cyan);">MySQL</div><div class="label" style="margin-top:4px;">Database</div></div>
-      <div class="skill-node reveal reveal-delay-2"><div class="f-display" style="font-size:14px;color:var(--cyan);">SFML</div><div class="label" style="margin-top:4px;">Graphics</div></div>
-      <div class="skill-node reveal reveal-delay-3"><div class="f-display" style="font-size:14px;color:var(--cyan);">scipy</div><div class="label" style="margin-top:4px;">Signal Proc.</div></div>
-      <div class="skill-node reveal reveal-delay-4"><div class="f-display" style="font-size:14px;color:var(--cyan);">Algorithm Design</div><div class="label" style="margin-top:4px;">Specialization</div></div>
-      <div class="skill-node reveal reveal-delay-5"><div class="f-display" style="font-size:14px;color:var(--cyan);">Data Viz</div><div class="label" style="margin-top:4px;">Analytics</div></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:0;">
+      <div class="f-display reveal reveal-delay-1" style="font-size:clamp(2.5rem,5vw,4rem);">STACK<span style="color:var(--cyan);">.</span></div>
+      <p class="label reveal reveal-delay-2" style="max-width:360px;line-height:1.8;padding-bottom:8px;text-align:right;">Ten primitives that compose into every system I ship.<br>Hover for runtime telemetry.</p>
+    </div>
+
+    <!-- Skills Stage — desktop: scattered absolute, mobile: grid -->
+    <div class="skills-stage reveal reveal-delay-3" id="skillsStage">
+
+      <div class="skill-node sn-cy" data-pos="8,6">
+        <div class="sn-icon">Py</div>
+        <div class="sn-lab">Python</div>
+        <div class="sn-meta">// PRIMARY · DATA SCIENCE</div>
+      </div>
+
+      <div class="skill-node sn-gn" data-pos="6,32">
+        <div class="sn-icon">ML</div>
+        <div class="sn-lab">Machine Learning</div>
+        <div class="sn-meta">// scikit · pipelines</div>
+      </div>
+
+      <div class="skill-node sn-cy" data-pos="12,58">
+        <div class="sn-icon">C++</div>
+        <div class="sn-lab">C / C++</div>
+        <div class="sn-meta">// SYSTEMS · SFML</div>
+      </div>
+
+      <div class="skill-node sn-gn" data-pos="4,82">
+        <div class="sn-icon">∿</div>
+        <div class="sn-lab">Signal Processing</div>
+        <div class="sn-meta">// EEG · FFT · DSP</div>
+      </div>
+
+      <div class="skill-node sn-cy" data-pos="40,4">
+        <div class="sn-icon">σ</div>
+        <div class="sn-lab">Statistical Analysis</div>
+        <div class="sn-meta">// F-TEST · HYPOTHESIS</div>
+      </div>
+
+      <div class="skill-node sn-cy" data-pos="44,28">
+        <div class="sn-icon">D3</div>
+        <div class="sn-lab">Data Visualization</div>
+        <div class="sn-meta">// matplotlib · d3</div>
+      </div>
+
+      <div class="skill-node sn-gn" data-pos="38,56">
+        <div class="sn-icon">&lt;/&gt;</div>
+        <div class="sn-lab">HTML / CSS / JS</div>
+        <div class="sn-meta">// FRONT-END · CINEMATIC</div>
+      </div>
+
+      <div class="skill-node sn-cy" data-pos="42,80">
+        <div class="sn-icon">⎇</div>
+        <div class="sn-lab">Git / GitHub</div>
+        <div class="sn-meta">// VERSION CTRL</div>
+      </div>
+
+      <div class="skill-node sn-gn" data-pos="72,18">
+        <div class="sn-icon">GS</div>
+        <div class="sn-lab">GSAP</div>
+        <div class="sn-meta">// MOTION · SCROLL</div>
+      </div>
+
+      <div class="skill-node sn-cy" data-pos="74,50">
+        <div class="sn-icon">▦</div>
+        <div class="sn-lab">System Architecture</div>
+        <div class="sn-meta">// PIPELINES · OOP</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1155,23 +1391,43 @@ body > *:last-child,
 
 <!-- ── ALTER EGO GATE ── -->
 <section id="altrego">
-  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px;text-align:center;position:relative;overflow:hidden;">
+  <div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 40px;position:relative;overflow:hidden;">
     <div id="aeBg" style="position:absolute;inset:0;pointer-events:none;transition:background .3s;"></div>
-    <p class="label" style="margin-bottom:24px;position:relative;z-index:1;">SYSTEM DESTABILIZING</p>
-    <div id="aeTitle" style="position:relative;z-index:1;transition:filter .1s;">
-      <div class="f-display" style="font-size:clamp(2.5rem,6vw,5.5rem);color:#f3fbff;">WANNA SEE THE</div>
-      <div class="f-display" style="font-size:clamp(2.5rem,6vw,5.5rem);color:var(--danger);margin-bottom:16px;">ALTER-EGO?</div>
+
+    <!-- Section header -->
+    <p class="label" style="margin-bottom:16px;position:relative;z-index:1;">▲ RESTRICTED CHANNEL · AUTHORISE VIA SLIDER</p>
+    <div id="aeTitle" style="position:relative;z-index:1;transition:filter .1s;margin-bottom:12px;">
+      <div class="f-display" style="font-size:clamp(2rem,5vw,4.5rem);color:#f3fbff;">There's <span style="color:var(--cyan);">another</span> side to this <span style="text-decoration:line-through;opacity:.5;">system</span>.</div>
     </div>
-    <p class="label" style="margin-bottom:40px;position:relative;z-index:1;">DRAG SLIDER UPWARD TO DESTABILIZE</p>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;z-index:1;">
-      <div class="label" id="aeHint">DRAG UP</div>
-      <div class="ae-track">
-        <div class="ae-fill" id="aeFill" style="height:0%;transition:height .05s;"></div>
+    <p class="label" style="margin-bottom:48px;position:relative;z-index:1;max-width:560px;line-height:1.8;">The engineer keeps a second identity in a locked drawer. Slide the dial to 100% to declassify.</p>
+
+    <!-- NEW SLIDER DESIGN -->
+    <div class="ae-slider-wrap" id="aeSliderWrap" style="position:relative;z-index:1;">
+
+      <!-- Head row -->
+      <div class="ae-slider-head">
+        <span class="ae-slider-label">Identity Threshold</span>
+        <span class="ae-slider-bigval" id="aeVal">00%</span>
+        <span class="ae-slider-state" id="aeInt">// IDENTITY_A · ENGINEER</span>
       </div>
-      <div class="ae-handle" id="aeHandle">
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#050816;" id="aeVal">0%</span>
+
+      <!-- Track -->
+      <div class="ae-track-new" id="aeHandle">
+        <div class="ae-rail"></div>
+        <div class="ae-fill-new" id="aeFill" style="width:0%;"></div>
+        <div class="ae-ticks" id="aeTicks"></div>
+        <div class="ae-knob" id="aeKnob" style="left:0%;">
+          <div class="ae-knob-grip"></div>
+        </div>
       </div>
-      <div class="label" id="aeInt">SYSTEM INTEGRITY: 100%</div>
+
+      <!-- Footer -->
+      <div class="ae-slider-footer">
+        <span>0% · ENGINEER MODE</span>
+        <span class="ae-threshold" id="aeHint">↓ DRAG TO REVEAL ↓</span>
+        <span>100% · STORYTELLER</span>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2384,243 +2640,220 @@ function runGlitchTransition(onDone){
   tick();
 })();
 
-// ── ALTER EGO SLIDER — struggle mechanics + V reveal ──────────
+// ── ALTER EGO SLIDER — new design + existing chaos logic ──────
 (function(){
-  const aeHandle = document.getElementById('aeHandle');
-  const aeFill   = document.getElementById('aeFill');
-  const aeVal    = document.getElementById('aeVal');
-  const aeInt    = document.getElementById('aeInt');
-  const aeHint   = document.getElementById('aeHint');
-  const aeBg     = document.getElementById('aeBg');
-  const aeTitle  = document.getElementById('aeTitle');
+  const aeHandle  = document.getElementById('aeHandle'); // now the track
+  const aeKnob    = document.getElementById('aeKnob');
+  const aeFillNew = document.getElementById('aeFill');
+  const aeVal     = document.getElementById('aeVal');
+  const aeInt     = document.getElementById('aeInt');
+  const aeHint    = document.getElementById('aeHint');
+  const aeBg      = document.getElementById('aeBg');
+  const aeTitle   = document.getElementById('aeTitle');
+  const aeWrap    = document.getElementById('aeSliderWrap');
   if(!aeHandle) return;
+
+  // Build ticks
+  const ticksEl = document.getElementById('aeTicks');
+  if(ticksEl){
+    for(let i=0;i<=20;i++){
+      const s=document.createElement('span');
+      if(i%5===0) s.className='major';
+      ticksEl.appendChild(s);
+    }
+  }
 
   let isDragging  = false;
   let currentD    = 0;
   let glitchIv    = null;
   let decayIv     = null;
   let missionDone = false;
-  let _dragStartY = 0;
-  let _dragBaseD  = 0;
 
-  // ── GLITCH SYSTEM ──────────────────────────────────────────
   const glitchLayer = document.getElementById('glitchLayer');
 
   function spawnStrikeGlitch(intensity){
     if(!glitchLayer) return;
     const count = Math.floor(3 + intensity * 12);
-    for(let i=0; i<count; i++){
-      const el = document.createElement('div');
-      const isOrange = Math.random() > 0.5;
-      const h = Math.floor(Math.random() * 20 + 1);
-      el.style.cssText = `
-        position:absolute;
-        top:${Math.random()*100}%;
-        left:${Math.random()*20}%;
-        width:${40+Math.random()*60}%;
-        height:${h}px;
-        background:${isOrange
-          ? `rgba(255,${Math.floor(80+Math.random()*80)},0,${0.4+intensity*.5})`
-          : `rgba(255,${Math.floor(20+Math.random()*40)},${Math.floor(20+Math.random()*40)},${0.5+intensity*.4})`};
-        mix-blend-mode:screen;
-        pointer-events:none;
-        z-index:999;
-      `;
+    for(let i=0;i<count;i++){
+      const el=document.createElement('div');
+      const isOrange=Math.random()>.5;
+      const h=Math.floor(Math.random()*20+1);
+      el.style.cssText=`position:absolute;top:${Math.random()*100}%;left:${Math.random()*20}%;width:${40+Math.random()*60}%;height:${h}px;background:${isOrange?`rgba(255,${Math.floor(80+Math.random()*80)},0,${0.4+intensity*.5})`:`rgba(255,${Math.floor(20+Math.random()*40)},${Math.floor(20+Math.random()*40)},${0.5+intensity*.4})`};mix-blend-mode:screen;pointer-events:none;z-index:999;`;
       glitchLayer.appendChild(el);
-      setTimeout(()=>el.remove(), 50 + Math.random()*100);
+      setTimeout(()=>el.remove(),50+Math.random()*100);
     }
-    // Chromatic aberration on whole page
-    const ab = intensity * 14;
-    document.body.style.filter = `drop-shadow(${ab}px 0 0 rgba(255,60,0,0.4)) drop-shadow(-${ab}px 0 0 rgba(255,100,0,0.3))`;
-    setTimeout(()=>{ document.body.style.filter=''; }, 80);
+    const ab=intensity*14;
+    document.body.style.filter=`drop-shadow(${ab}px 0 0 rgba(255,60,0,0.4)) drop-shadow(-${ab}px 0 0 rgba(255,100,0,0.3))`;
+    setTimeout(()=>{document.body.style.filter='';},80);
   }
 
   function startGlitching(intensity){
     if(glitchIv) clearInterval(glitchIv);
-    const rate = Math.max(30, 180 - intensity * 140);
-    glitchIv = setInterval(()=>{
-      if(!isDragging){ clearInterval(glitchIv); glitchIv=null; return; }
+    const rate=Math.max(30,180-intensity*140);
+    glitchIv=setInterval(()=>{
+      if(!isDragging){clearInterval(glitchIv);glitchIv=null;return;}
       spawnStrikeGlitch(intensity);
-    }, rate);
+    },rate);
   }
 
-  // ── RESISTANCE CURVE ───────────────────────────────────────
-  // Smooth all the way — experience not trauma
-  function applyResistance(raw){
-    return raw; // no resistance, full range
-  }
-
-  // ── DECAY — only 4% drop on release/leave, then holds ────
   function startDecay(){
     if(decayIv) clearInterval(decayIv);
-    // Drop exactly 4% then stop
-    const target = Math.max(0, currentD - 0.04);
-    decayIv = setInterval(()=>{
-      if(isDragging || missionDone){ clearInterval(decayIv); return; }
-      currentD = Math.max(target, currentD - 0.006);
-      _dragBaseD = currentD;
+    const target=Math.max(0,currentD-0.04);
+    decayIv=setInterval(()=>{
+      if(isDragging||missionDone){clearInterval(decayIv);return;}
+      currentD=Math.max(target,currentD-0.006);
       updateUI(currentD);
-      if(currentD <= target){ clearInterval(decayIv); decayIv = null; }
-    }, 16);
+      if(currentD<=target){clearInterval(decayIv);decayIv=null;}
+    },16);
   }
 
-  // ── UPDATE UI ──────────────────────────────────────────────
   function updateUI(d){
-    const pct = Math.round(d * 100);
-    aeFill.style.height = (d * 100) + '%';
-    aeVal.textContent = pct + '%';
-    aeInt.textContent = 'SYSTEM INTEGRITY: ' + Math.round((1-d)*100) + '%';
+    const pct=Math.round(d*100);
+    const pctStr=String(pct).padStart(2,'0')+'%';
+    if(aeFillNew) aeFillNew.style.width=(d*100)+'%';
+    if(aeKnob) aeKnob.style.left=(d*100)+'%';
+    if(aeVal) aeVal.textContent=pctStr;
 
-    if(d <= 0.21){
-      aeHint.textContent = 'DRAG UP';
-      aeHint.style.color = 'var(--muted)';
-    } else if(d < 0.5){
-      aeHint.textContent = '⚠ RESISTANCE INCREASING...';
-      aeHint.style.color = '#ff8c00';
-    } else if(d < 0.8){
-      aeHint.textContent = '🔴 SYSTEM FIGHTING BACK';
-      aeHint.style.color = '#ff4d6d';
+    // State labels
+    if(d>=1){
+      if(aeInt) aeInt.textContent='// IDENTITY_B · RESTRICTED';
+      if(aeHint) aeHint.textContent='✓ AUTHENTICATED · WELCOME, V.';
+      if(aeWrap) aeWrap.closest('section').classList.add('ae-altered');
+    } else if(d>0.6){
+      if(aeInt) aeInt.textContent='// IDENTITY_?? · INTERPOLATING';
+      if(aeHint) aeHint.textContent='↑ HOLD · APPROACHING THRESHOLD';
+    } else if(d>0.21){
+      if(aeInt) aeInt.textContent='// IDENTITY_A · DESTABILIZING';
+      if(aeHint) aeHint.textContent='⚠ RESISTANCE INCREASING...';
     } else {
-      aeHint.textContent = '💀 PUSH THROUGH — ALMOST THERE';
-      aeHint.style.color = '#ff0000';
+      if(aeInt) aeInt.textContent='// IDENTITY_A · ENGINEER';
+      if(aeHint) aeHint.textContent='↓ DRAG TO REVEAL ↓';
+      if(aeWrap) aeWrap.closest('section').classList.remove('ae-altered');
     }
 
-    aeBg.style.background = `radial-gradient(circle at center,rgba(255,${Math.floor(77-d*60)},0,${d*.4}) 0%,transparent 70%)`;
+    aeBg.style.background=`radial-gradient(circle at center,rgba(255,${Math.floor(77-d*60)},0,${d*.4}) 0%,transparent 70%)`;
 
-    const ab = d * 14;
-    if(d > 0.21){
-      aeTitle.style.filter = `hue-rotate(${d*40}deg) drop-shadow(${ab}px 0 0 rgba(255,60,0,0.7)) drop-shadow(-${ab}px 0 0 rgba(255,100,0,0.5))`;
+    const ab=d*14;
+    if(d>0.21){
+      aeTitle.style.filter=`hue-rotate(${d*40}deg) drop-shadow(${ab}px 0 0 rgba(255,60,0,0.7)) drop-shadow(-${ab}px 0 0 rgba(255,100,0,0.5))`;
+      startGlitching((d-0.21)/0.79);
     } else {
-      aeTitle.style.filter = 'none';
-    }
-
-    aeHandle.style.background = d > 0.5
-      ? `linear-gradient(135deg,#ff4d6d,#ff8c00)`
-      : d > 0.21
-      ? `linear-gradient(135deg,#ff8c00,#ff4d6d)`
-      : 'linear-gradient(135deg,#00d4ff,#00ff88)';
-    aeHandle.style.boxShadow = `0 0 ${20+d*30}px ${d>0.5?'rgba(255,60,0,0.8)':'rgba(0,212,255,0.5)'}`;
-
-    // Glitch intensity
-    if(d > 0.21){
-      const intensity = (d - 0.21) / 0.79;
-      startGlitching(intensity);
+      aeTitle.style.filter='none';
     }
   }
 
-  function resetUI(){
-    aeTitle.style.filter = 'none';
-    aeBg.style.background = '';
-    aeHandle.style.background = 'linear-gradient(135deg,#00d4ff,#00ff88)';
-    aeHandle.style.boxShadow = '0 0 20px rgba(0,212,255,0.4)';
-    aeHint.textContent = 'DRAG UP';
-    aeHint.style.color = 'var(--muted)';
-    aeInt.textContent = 'SYSTEM INTEGRITY: 100%';
-    if(glitchIv){ clearInterval(glitchIv); glitchIv=null; }
-    document.body.style.filter = '';
+  // Drag from track (horizontal)
+  function pctFromEvent(e){
+    const r=aeHandle.getBoundingClientRect();
+    const x=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+    return Math.max(0,Math.min(1,x/r.width));
   }
 
-  // Cleaner drag implementation
-  aeHandle.addEventListener('mousedown', e=>{
-    if(missionDone) return;
-    isDragging  = true;
-    _dragStartY = e.clientY;
-    _dragBaseD  = currentD;
-    if(decayIv){ clearInterval(decayIv); decayIv=null; }
-    e.preventDefault();
-  });
-
-  document.addEventListener('mousemove', e=>{
-    if(!isDragging || missionDone) return;
-    const rawVal  = Math.max(0, Math.min(1, _dragBaseD + (_dragStartY - e.clientY) / 180));
-    currentD = applyResistance(rawVal);
+  function onDragStart(e){
+    isDragging=true;
+    if(decayIv){clearInterval(decayIv);decayIv=null;}
+    currentD=pctFromEvent(e);
     updateUI(currentD);
-    if(currentD >= 0.995) triggerVReveal();
-  });
+    if(currentD>=1&&!missionDone){
+      missionDone=true;
+      setTimeout(()=>launchVWorld(),400);
+    }
+  }
+  function onDragMove(e){
+    if(!isDragging) return;
+    currentD=pctFromEvent(e);
+    updateUI(currentD);
+    if(currentD>=1&&!missionDone){
+      missionDone=true;
+      setTimeout(()=>launchVWorld(),400);
+    }
+  }
+  function onDragEnd(){
+    isDragging=false;
+    if(!missionDone) startDecay();
+    if(glitchIv){clearInterval(glitchIv);glitchIv=null;}
+    document.body.style.filter='';
+  }
 
-  document.addEventListener('mouseup', ()=>{
-    if(!isDragging || missionDone) return;
-    isDragging = false;
-    if(glitchIv){ clearInterval(glitchIv); glitchIv=null; }
-    document.body.style.filter = '';
-    // Hold position — no decay on release
-    _dragBaseD = currentD;
-  });
-
-  document.addEventListener('mouseleave', ()=>{
-    if(!isDragging || missionDone) return;
-    isDragging = false;
-    if(glitchIv){ clearInterval(glitchIv); glitchIv=null; }
-    document.body.style.filter = '';
-    // Only drop 4% on cursor leave
-    startDecay();
-  });
-
+  // Mouse
+  aeHandle.addEventListener('mousedown',onDragStart);
+  window.addEventListener('mousemove',onDragMove);
+  window.addEventListener('mouseup',onDragEnd);
   // Touch
-  aeHandle.addEventListener('touchstart', e=>{
-    if(missionDone) return;
-    isDragging  = true;
-    _dragStartY = e.touches[0].clientY;
-    _dragBaseD  = currentD;
-    if(decayIv){ clearInterval(decayIv); decayIv=null; }
-  }, { passive: true });
-
-  document.addEventListener('touchmove', e=>{
-    if(!isDragging || missionDone) return;
-    const rawVal = Math.max(0, Math.min(1, _dragBaseD + (_dragStartY - e.touches[0].clientY) / 180));
-    currentD = applyResistance(rawVal);
-    updateUI(currentD);
-    if(currentD >= 0.995) triggerVReveal();
-  }, { passive: true });
-
-  document.addEventListener('touchend', ()=>{
-    if(!isDragging || missionDone) return;
-    isDragging = false;
-    if(glitchIv){ clearInterval(glitchIv); glitchIv=null; }
-    // Hold position on release
-    _dragBaseD = currentD;
+  aeHandle.addEventListener('touchstart',e=>{onDragStart(e);},{passive:false});
+  window.addEventListener('touchmove',e=>{if(isDragging){e.preventDefault();onDragMove(e);}},{passive:false});
+  window.addEventListener('touchend',onDragEnd,{passive:true});
+  // Keyboard
+  aeHandle.tabIndex=0;
+  aeHandle.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight') {currentD=Math.min(1,currentD+0.05);updateUI(currentD);}
+    if(e.key==='ArrowLeft')  {currentD=Math.max(0,currentD-0.05);updateUI(currentD);}
+    if(currentD>=1&&!missionDone){missionDone=true;setTimeout(()=>launchVWorld(),400);}
   });
-
-  // ── V REVEAL SEQUENCE ──────────────────────────────────────
-  function triggerVReveal(){
-    if(missionDone) return;
-    missionDone = true;
-    isDragging  = false;
-    if(glitchIv){ clearInterval(glitchIv); glitchIv=null; }
-    if(decayIv){ clearInterval(decayIv); decayIv=null; }
-
-    // Short glitch burst, then navigate straight to VWorldBoot
-    let chaosCount = 0;
-    const chaosIv = setInterval(()=>{
-      chaosCount++;
-      spawnStrikeGlitch(1.0);
-      document.body.style.background = `rgb(${Math.floor(160+Math.random()*95)},0,0)`;
-      document.body.style.filter = `saturate(${2+Math.random()*3}) contrast(${1.5+Math.random()}) hue-rotate(${Math.random()*30}deg)`;
-      document.body.style.transform = `translate(${(Math.random()-.5)*12}px,${(Math.random()-.5)*8}px)`;
-      if(chaosCount > 18){
-        clearInterval(chaosIv);
-        document.body.style.transition = 'background .12s, filter .12s, transform .08s';
-        document.body.style.background = '#ffffff';
-        document.body.style.filter = 'brightness(10)';
-        document.body.style.transform = 'none';
-        setTimeout(()=>{
-          document.body.style.background = '#000';
-          document.body.style.filter = 'none';
-          setTimeout(()=>{
-            document.body.style.transition = 'opacity .35s ease';
-            document.body.style.opacity = '0';
-            setTimeout(()=>{ window.location.href = 'VWorldBoot.html'; }, 380);
-          }, 140);
-        }, 110);
-      }
-    }, 55);
-  }
-
-
 })();
 
 
-// ── MOBILE HAMBURGER MENU ────────────────────────────────────────
+
+// ── LAUNCH V WORLD ────────────────────────────────────────────
+function launchVWorld(){
+  // Phase 1: chaos glitch storm
+  let chaosCount = 0;
+  const glitchLayer = document.getElementById('glitchLayer');
+  const chaosIv = setInterval(()=>{
+    chaosCount++;
+    document.body.style.background = `rgb(${Math.floor(160+Math.random()*95)},0,0)`;
+    document.body.style.filter = `saturate(${2+Math.random()*3}) contrast(${1.5+Math.random()}) hue-rotate(${Math.random()*30}deg)`;
+    document.body.style.transform = `translate(${(Math.random()-.5)*12}px,${(Math.random()-.5)*8}px)`;
+    if(glitchLayer){
+      for(let i=0;i<6;i++){
+        const el=document.createElement('div');
+        el.style.cssText=`position:fixed;top:${Math.random()*100}%;left:0;width:100%;height:${Math.random()*8+1}px;background:rgba(255,${Math.floor(Math.random()*80)},0,0.7);z-index:9999;pointer-events:none;`;
+        glitchLayer.appendChild(el);
+        setTimeout(()=>el.remove(),60);
+      }
+    }
+    if(chaosCount > 18){
+      clearInterval(chaosIv);
+      document.body.style.transition='background .12s,filter .12s,transform .08s';
+      document.body.style.background='#ffffff';
+      document.body.style.filter='brightness(10)';
+      document.body.style.transform='none';
+      setTimeout(()=>{
+        document.body.style.background='#000';
+        document.body.style.filter='none';
+        setTimeout(()=>{
+          document.body.style.transition='opacity .35s ease';
+          document.body.style.opacity='0';
+          setTimeout(()=>{ window.location.href='VWorldBoot.html'; },380);
+        },140);
+      },110);
+    }
+  },55);
+}
+
+// ── SKILLS STAGE — position nodes on desktop ────────────────
+(function(){
+  function positionNodes(){
+    const stage = document.getElementById('skillsStage');
+    if(!stage) return;
+    const isMobile = window.innerWidth <= 768;
+    const nodes = stage.querySelectorAll('.skill-node');
+    nodes.forEach(node=>{
+      if(isMobile){
+        node.style.top=''; node.style.left=''; node.style.position='';
+      } else {
+        const pos = node.getAttribute('data-pos');
+        if(pos){
+          const [t,l] = pos.split(',');
+          node.style.top=t+'%'; node.style.left=l+'%';
+          node.style.position='absolute';
+        }
+      }
+    });
+  }
+  positionNodes();
+  window.addEventListener('resize', positionNodes);
+})();
 (function(){
   const btn = document.getElementById('mobileMenuBtn');
   const nav = document.getElementById('mainNav');
