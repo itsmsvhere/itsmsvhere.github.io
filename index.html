@@ -1421,28 +1421,27 @@ body > *:last-child,
       </div>
     </div>
 
-    <!-- TWO MINDS — hidden, slams in at 100% before chaos -->
-    <div id="twoMinds" style="
-      position:absolute;inset:0;z-index:10;
-      display:none;align-items:center;justify-content:center;
-      background:#000;
-      opacity:0;transition:opacity .25s ease;
-    ">
-      <div style="text-align:center;position:relative;z-index:2;">
-        <div style="font-family:'Anton',sans-serif;font-size:clamp(2.5rem,8vw,7rem);line-height:.95;letter-spacing:-.02em;">
-          <span style="color:#fff;">TWO MINDS.</span><br>
-          <span id="tmOperator" style="color:#00d4ff;font-style:italic;transition:color .1s;">ONE OPERATOR.</span>
-        </div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.3em;color:rgba(255,255,255,0.25);margin-top:24px;text-transform:uppercase;">▲ END OF TRANSMISSION · BEGIN LOOP</div>
-      </div>
-      <!-- Crimson scan lines -->
-      <div id="tmLines" style="position:absolute;inset:0;pointer-events:none;z-index:3;overflow:hidden;"></div>
     </div>
-
   </div>
 </section>
 
 </main>
+
+<!-- TWO MINDS — outside main so it survives the page fade -->
+<div id="twoMinds" style="
+  position:fixed;inset:0;z-index:99990;
+  display:none;align-items:center;justify-content:center;
+  background:#000;opacity:0;transition:opacity .25s ease;
+">
+  <div style="text-align:center;position:relative;z-index:2;">
+    <div style="font-family:'Anton',sans-serif;font-size:clamp(2.5rem,8vw,7rem);line-height:.95;letter-spacing:-.02em;">
+      <span style="color:#fff;">TWO MINDS.</span><br>
+      <span id="tmOperator" style="color:#00d4ff;font-style:italic;transition:color .1s;">ONE OPERATOR.</span>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.3em;color:rgba(255,255,255,.25);margin-top:24px;text-transform:uppercase;">▲ END OF TRANSMISSION · BEGIN LOOP</div>
+  </div>
+  <div id="tmLines" style="position:absolute;inset:0;pointer-events:none;z-index:3;overflow:hidden;"></div>
+</div>
 
 <script>
 // ── NAV ──────────────────────────────────────────────────────
@@ -2809,69 +2808,75 @@ function launchVWorld(){
   const tm       = document.getElementById('twoMinds');
   const tmOp     = document.getElementById('tmOperator');
   const tmLines  = document.getElementById('tmLines');
+  const mainEl   = document.querySelector('main');
+  const hdrEl    = document.querySelector('.hdr');
+  const vnavEl   = document.getElementById('vnav');
 
-  // ── STEP 1: Show TWO MINDS — ONE OPERATOR in CYAN ──────────
-  if(tm){
-    tm.style.display='flex';
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{ tm.style.opacity='1'; }));
-  }
+  // ── STEP 1: Fade everything out to black ───────────────────
+  if(mainEl){ mainEl.style.transition='opacity .5s ease'; mainEl.style.opacity='0'; }
+  if(hdrEl){  hdrEl.style.transition='opacity .5s ease';  hdrEl.style.opacity='0'; }
+  if(vnavEl){ vnavEl.style.transition='opacity .5s ease'; vnavEl.style.opacity='0'; }
+  document.body.style.transition='background .5s ease';
+  document.body.style.background='#000';
 
-  // ── STEP 2: After 1s — glitch ONE OPERATOR cyan → red ──────
+  // ── STEP 2: After fade — show TWO MINDS in CYAN ────────────
   setTimeout(()=>{
-    if(!tmOp) return;
-    let gf=0;
-    const giv=setInterval(()=>{
-      gf++;
-      // Flicker between cyan and red rapidly
-      tmOp.style.color = gf%2===0 ? '#00d4ff' : '#cc0000';
-      tmOp.style.transform = `translate(${((Math.random()-.5)*12).toFixed(1)}px,0)`;
-      if(gf>10){
-        clearInterval(giv);
-        tmOp.style.color='#cc0000'; // lock to red
-        tmOp.style.transform='none';
+    if(tm){
+      tm.style.display='flex';
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{ tm.style.opacity='1'; }));
+    }
 
-        // ── STEP 3: Crimson scan lines + shake ────────────────
-        let sc=0;
-        const linesIv=setInterval(()=>{
-          sc++;
-          // Spawn crimson lines
-          if(tmLines){
-            const line=document.createElement('div');
-            line.style.cssText=`
-              position:absolute;
-              left:0;right:0;
-              top:${Math.random()*100}%;
-              height:${Math.random()*6+1}px;
-              background:rgba(204,0,0,${0.5+Math.random()*.5});
-              box-shadow:0 0 8px rgba(204,0,0,.6);
-            `;
-            tmLines.appendChild(line);
-            setTimeout(()=>line.remove(), 80);
-          }
-          // Shake the whole card
-          if(tm){
-            tm.style.transform=`translate(${((Math.random()-.5)*14).toFixed(1)}px,${((Math.random()-.5)*8).toFixed(1)}px)`;
-          }
-          if(sc>20){
-            clearInterval(linesIv);
-            if(tm){ tm.style.transform='none'; }
+    // ── STEP 3: After 1s — glitch ONE OPERATOR cyan → red ────
+    setTimeout(()=>{
+      if(!tmOp) return;
+      let gf=0;
+      const giv=setInterval(()=>{
+        gf++;
+        tmOp.style.color = gf%2===0 ? '#00d4ff' : '#cc0000';
+        tmOp.style.transform = `translate(${((Math.random()-.5)*12).toFixed(1)}px,0)`;
+        if(gf>10){
+          clearInterval(giv);
+          tmOp.style.color='#cc0000';
+          tmOp.style.transform='none';
 
-            // ── STEP 4: Black → navigate ──────────────────────
-            setTimeout(()=>{
-              tm.style.transition='opacity .3s ease';
-              tm.style.opacity='0';
-              document.body.style.background='#000';
+          // ── STEP 4: Crimson scan lines + shake ──────────────
+          let sc=0;
+          const linesIv=setInterval(()=>{
+            sc++;
+            if(tmLines){
+              const line=document.createElement('div');
+              line.style.cssText=`
+                position:absolute;left:0;right:0;
+                top:${Math.random()*100}%;
+                height:${Math.random()*6+1}px;
+                background:rgba(204,0,0,${0.5+Math.random()*.5});
+                box-shadow:0 0 8px rgba(204,0,0,.6);
+              `;
+              tmLines.appendChild(line);
+              setTimeout(()=>line.remove(),80);
+            }
+            if(tm) tm.style.transform=`translate(${((Math.random()-.5)*14).toFixed(1)}px,${((Math.random()-.5)*8).toFixed(1)}px)`;
+
+            if(sc>20){
+              clearInterval(linesIv);
+              if(tm) tm.style.transform='none';
+
+              // ── STEP 5: Black → navigate ─────────────────────
               setTimeout(()=>{
-                document.body.style.transition='opacity .35s ease';
-                document.body.style.opacity='0';
-                setTimeout(()=>{ window.location.href='VWorldBoot.html'; },380);
-              },300);
-            },150);
-          }
-        },60);
-      }
-    },55);
-  },1000);
+                tm.style.transition='opacity .3s ease';
+                tm.style.opacity='0';
+                setTimeout(()=>{
+                  document.body.style.transition='opacity .35s ease';
+                  document.body.style.opacity='0';
+                  setTimeout(()=>{ window.location.href='VWorldBoot.html'; },380);
+                },300);
+              },150);
+            }
+          },60);
+        }
+      },55);
+    },1000);
+  },600);
 }
 
 // ── SKILLS STAGE — position nodes on desktop ────────────────
